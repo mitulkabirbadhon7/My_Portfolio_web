@@ -13,3 +13,9 @@ build/
 
 # OS Files
 Thumbs.db
+
+# Agent instructions (never push to GitHub)
+docs/AGENTIC_EXECUTION_ROADMAP.md
+
+# Local config with secrets/personal data
+docs/CONFIG.md
