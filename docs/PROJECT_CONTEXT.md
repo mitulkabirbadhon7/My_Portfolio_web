@@ -132,3 +132,11 @@ Resend REST SDK with HTML templating, validation, and reply-to configuration.
 - Google Gen AI SDK (`@google/genai`) using `gemini-2.5-flash`.
 - Server-side proxy isolating `GEMINI_API_KEY`.
 - Bounded history (last 6 turns) and max output limit (500 tokens).
+
+## Production Deployment (Phase 37)
+- Platform: Render (Node Web Service)
+- Live Backend Base URL: https://mkb-portfolio-wev.onrender.com
+- Live API v1 Base: https://mkb-portfolio-wev.onrender.com/api/v1
+- Production Domain: mitulkabirbadhon.me
+- Production Frontend URL: https://mitulkabirbadhon.me
+- Health Check: https://mkb-portfolio-wev.onrender.com/api/v1/health (Verified HTTP 200)
