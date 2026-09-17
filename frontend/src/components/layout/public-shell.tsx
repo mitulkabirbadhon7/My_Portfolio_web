@@ -4,6 +4,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { ChatWidget } from "@/components/public/ChatWidget";
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -18,6 +19,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen flex-col bg-[#0F0F0F] text-[#F8F8F8] selection:bg-[#5DD62C]/20 selection:text-[#5DD62C]">
       <Navbar />
       <div className="flex-1">{children}</div>
+      <ChatWidget />
       <Footer />
     </div>
   );

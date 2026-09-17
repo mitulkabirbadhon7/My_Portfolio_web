@@ -138,7 +138,7 @@ export default async function HomePage() {
 
             {/* CTA 3: Ask AI */}
             <Link
-              href="/chat"
+              href="#chat"
               className="inline-flex items-center gap-2 rounded-lg border border-[#337418]/80 bg-[#202020] px-4 py-2.5 text-sm font-medium text-[#5DD62C] transition-all hover:bg-[#5DD62C]/10 hover:border-[#5DD62C] outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
             >
               <Sparkles className="size-4" />
@@ -421,7 +421,7 @@ export default async function HomePage() {
 
           <div className="mt-6 pt-4 border-t border-[#2A2A2A]">
             <Link
-              href="/chat"
+              href="#chat"
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#337418] bg-[#5DD62C] px-4 py-2.5 text-sm font-semibold text-[#0F0F0F] transition-all hover:bg-[#5DD62C]/90 hover:shadow-[0_0_16px_rgba(93,214,44,0.3)] outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
             >
               <Sparkles className="size-4" />
