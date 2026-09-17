@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 
-// Read PRODUCTION_DOMAIN from docs/CONFIG.md (currently TBD)
-// TODO: replace with production domain
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// Production Canonical Domain from docs/CONFIG.md
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mitulkabirbadhon.me";
 const RAW_API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -33,12 +32,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: currentDate,
       changeFrequency: "monthly",
       priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/support`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.5,
     },
   ];
 

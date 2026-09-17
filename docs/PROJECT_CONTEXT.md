@@ -148,3 +148,11 @@ Resend REST SDK with HTML templating, validation, and reply-to configuration.
 - Production Frontend URL: https://mitulkabirbadhon.me
 - Build Configuration: NEXT_PUBLIC_API_URL=https://mkb-portfolio-wev.onrender.com/api/v1
 - Image Domain Optimization: Cloudinary remotePatterns configured in next.config.ts
+
+## Canonical Production Domain Mapping (Phase 39)
+- Canonical Domain: mitulkabirbadhon.me
+- Frontend: https://mitulkabirbadhon.me
+- Backend API: https://mkb-portfolio-wev.onrender.com/api/v1
+- Canonical Base URL fallback in metadata, sitemap.ts, and robots.ts: https://mitulkabirbadhon.me
+- Robots sitemap: https://mitulkabirbadhon.me/sitemap.xml
+- DNS & Routing Status: Apex (mitulkabirbadhon.me) and WWW (www.mitulkabirbadhon.me) live with active TLS and HTTP 200 responses

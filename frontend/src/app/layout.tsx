@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// TODO: replace with production domain
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// Production Canonical Domain from docs/CONFIG.md
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mitulkabirbadhon.me";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
