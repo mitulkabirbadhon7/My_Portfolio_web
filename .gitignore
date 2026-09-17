@@ -19,3 +19,7 @@ docs/AGENTIC_EXECUTION_ROADMAP.md
 
 # Local config with secrets/personal data
 docs/CONFIG.md
+
+# Local task tracking files (never push to GitHub)
+Update.txt
+update.txt
