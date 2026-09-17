@@ -15,7 +15,6 @@ const NAV_ROUTES: NavRoute[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
-  { label: "Support", href: "/support" },
   { label: "Contact", href: "/contact" },
 ];
 

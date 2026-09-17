@@ -104,14 +104,6 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/support"
-                  className="transition-colors hover:text-[#5DD62C] outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]"
-                >
-                  Support & Sponsor
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/contact"
                   className="transition-colors hover:text-[#5DD62C] outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]"
                 >
