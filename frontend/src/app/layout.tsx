@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
+import { PublicShell } from "@/components/layout/public-shell";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dynamic Portfolio",
-  description: "Modern minimalist dynamic developer portfolio",
+  title: "Dynamic Portfolio | Mitul Kabir Badhon",
+  description: "Modern minimalist dynamic developer portfolio built with Next.js and electric green aesthetics",
 };
 
 export default function RootLayout({
@@ -29,7 +30,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Providers>{children}</Providers>
+        <Providers>
+          <PublicShell>{children}</PublicShell>
+        </Providers>
       </body>
     </html>
   );
