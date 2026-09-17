@@ -75,9 +75,25 @@ export async function generateMetadata({
     };
   }
 
+  const title = `${project.title} | Case Study`;
+  const description = project.description;
+
   return {
-    title: `${project.title} | Case Study`,
-    description: project.description,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `/projects/${project.slug}`,
+      ...(project.image ? { images: [{ url: project.image, alt: project.title }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(project.image ? { images: [project.image] } : {}),
+    },
   };
 }
 
