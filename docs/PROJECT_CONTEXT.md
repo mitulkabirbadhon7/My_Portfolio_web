@@ -140,3 +140,11 @@ Resend REST SDK with HTML templating, validation, and reply-to configuration.
 - Production Domain: mitulkabirbadhon.me
 - Production Frontend URL: https://mitulkabirbadhon.me
 - Health Check: https://mkb-portfolio-wev.onrender.com/api/v1/health (Verified HTTP 200)
+
+## Frontend Production Deployment (Phase 38)
+- Platform: Vercel (Next.js App Router)
+- Root Directory: frontend
+- Production Custom Domain: mitulkabirbadhon.me
+- Production Frontend URL: https://mitulkabirbadhon.me
+- Build Configuration: NEXT_PUBLIC_API_URL=https://mkb-portfolio-wev.onrender.com/api/v1
+- Image Domain Optimization: Cloudinary remotePatterns configured in next.config.ts
