@@ -38,6 +38,28 @@ export class SettingsController {
       next(error);
     }
   };
+
+  uploadImages = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const fieldName = (req.body?.imageType || req.params?.imageType) as string | undefined;
+      const settings = await settingsService.uploadImages(
+        req.files as
+          | { [fieldname: string]: Express.Multer.File[] }
+          | Express.Multer.File[]
+          | undefined,
+        req.file,
+        fieldName,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: 'Images uploaded successfully',
+        data: settings,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export const settingsController = new SettingsController();

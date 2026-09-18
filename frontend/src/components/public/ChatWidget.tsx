@@ -103,6 +103,10 @@ export function ChatWidget() {
       }
     };
 
+    if (window.location.hash === "#chat") {
+      setIsOpen(true);
+    }
+
     window.addEventListener("open-ai-chat", handleOpenChat);
     window.addEventListener("hashchange", handleHash);
     return () => {

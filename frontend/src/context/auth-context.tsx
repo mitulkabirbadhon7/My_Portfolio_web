@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { User, AuthResponse, LoginPayload } from "@/types";
-import { api, ApiError } from "@/lib/api";
+import { api, ApiError, BASE_URL } from "@/lib/api";
 
 interface AuthContextType {
   user: User | null;
@@ -26,7 +26,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const currentUser = res?.user || null;
       setUser(currentUser);
       return currentUser;
-    } catch {
+    } catch (err) {
+      console.warn(`[Auth Session] No active session at ${BASE_URL}/auth/me:`, err);
       setUser(null);
       return null;
     } finally {
@@ -45,8 +46,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setLoading(false);
         }
       })
-      .catch(() => {
+      .catch((err) => {
         if (isMounted) {
+          console.warn(`[Auth Initial Check] Session probe failed at ${BASE_URL}/auth/me:`, err);
           setUser(null);
           setLoading(false);
         }
@@ -60,6 +62,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Documented POST /auth/login
   const login = useCallback(async (credentials: LoginPayload): Promise<User> => {
     setLoading(true);
+    const targetUrl = `${BASE_URL}/auth/login`;
+    console.log(`[Auth Login] Submitting credentials to: ${targetUrl}`);
+
     try {
       const res = await api.post<AuthResponse>("/auth/login", credentials, { auth: true });
       if (!res?.user) {
@@ -67,6 +72,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
       setUser(res.user);
       return res.user;
+    } catch (err) {
+      console.error(`[Auth Login Failed] Failed to connect to ${targetUrl}:`, err);
+      throw err;
     } finally {
       setLoading(false);
     }

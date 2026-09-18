@@ -15,9 +15,9 @@ const seedDatabase = async () => {
     await SettingsModel.findOneAndUpdate(
       {},
       {
-        githubUrl: 'https://github.com/your-actual-username',
-        linkedinUrl: 'https://linkedin.com/in/your-actual-profile',
-        contactEmail: 'contact@example.com',
+        githubUrl: 'https://github.com/mitulkabirbadhon7',
+        linkedinUrl: 'https://linkedin.com/in/mitulkabirbadhon',
+        contactEmail: 'mitulkabirbadhon7@gmail.com',
       },
       { upsert: true, new: true },
     );

@@ -79,9 +79,23 @@ export function ContactForm() {
   const messageId = useId();
 
   // Contact points from documented settings endpoint
-  const contactEmail = settings.contactEmail || "mitulkabirbadhon7@gmail.com";
-  const githubUrl = settings.githubUrl || "https://github.com/mitulkabirbadhon7";
-  const linkedinUrl = settings.linkedinUrl;
+  const rawEmail = settings.contactEmail?.trim();
+  const contactEmail =
+    rawEmail && rawEmail !== "developer@example.com" && rawEmail !== "contact@example.com"
+      ? rawEmail
+      : "mitulkabirbadhon7@gmail.com";
+
+  const rawGithub = settings.githubUrl?.trim();
+  const githubUrl =
+    rawGithub && rawGithub !== "https://github.com" && rawGithub !== "https://github.com/your-actual-username"
+      ? rawGithub
+      : "https://github.com/mitulkabirbadhon7";
+
+  const rawLinkedin = settings.linkedinUrl?.trim();
+  const linkedinUrl =
+    rawLinkedin && rawLinkedin !== "https://linkedin.com" && rawLinkedin !== "https://linkedin.com/in/your-actual-profile"
+      ? rawLinkedin
+      : "https://linkedin.com/in/mitulkabirbadhon";
 
   // Validation according to backend controller rules
   const validateForm = (): boolean => {
@@ -200,7 +214,7 @@ export function ContactForm() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#F8F8F8]">
-            Let&apos;s talk engineering.
+            Contact with me
           </h1>
 
           <p className="text-base sm:text-lg leading-relaxed text-[#9E9E9E]">
@@ -214,20 +228,15 @@ export function ContactForm() {
           {/* Email Channel */}
           <a
             href={`mailto:${contactEmail}`}
-            className="group flex items-start gap-4 rounded-xl border border-[#2A2A2A] bg-[#202020] p-4 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_0_18px_rgba(93,214,44,0.12)] outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
-            aria-label={`Send direct email to ${contactEmail}`}
+            className="group flex items-center gap-4 rounded-xl border border-[#2A2A2A] bg-[#202020] p-4 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_0_18px_rgba(93,214,44,0.12)] outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
+            aria-label={`Send email to ${contactEmail}`}
           >
             <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] text-[#5DD62C] transition-colors group-hover:border-[#5DD62C]/60">
               <Mail className="size-5" />
             </span>
-            <div className="space-y-1">
-              <div className="font-mono text-xs uppercase tracking-wider text-[#9E9E9E]">
-                Direct Email
-              </div>
-              <div className="text-sm font-semibold text-[#F8F8F8] group-hover:text-[#5DD62C] transition-colors break-all">
-                {contactEmail}
-              </div>
-            </div>
+            <span className="text-sm font-semibold text-[#F8F8F8] group-hover:text-[#5DD62C] transition-colors break-all">
+              {contactEmail}
+            </span>
             <ArrowUpRight className="ml-auto size-4 text-[#9E9E9E] group-hover:text-[#5DD62C] transition-colors" />
           </a>
 
@@ -237,20 +246,15 @@ export function ContactForm() {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-4 rounded-xl border border-[#2A2A2A] bg-[#202020] p-4 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_0_18px_rgba(93,214,44,0.12)] outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
-              aria-label="Visit GitHub Profile"
+              className="group flex items-center gap-4 rounded-xl border border-[#2A2A2A] bg-[#202020] p-4 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_0_18px_rgba(93,214,44,0.12)] outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
+              aria-label="Visit GitHub"
             >
               <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] text-[#5DD62C] transition-colors group-hover:border-[#5DD62C]/60">
                 <GithubIcon className="size-5" />
               </span>
-              <div className="space-y-1">
-                <div className="font-mono text-xs uppercase tracking-wider text-[#9E9E9E]">
-                  Code Repository
-                </div>
-                <div className="text-sm font-semibold text-[#F8F8F8] group-hover:text-[#5DD62C] transition-colors break-all">
-                  GitHub Profile
-                </div>
-              </div>
+              <span className="text-sm font-semibold text-[#F8F8F8] group-hover:text-[#5DD62C] transition-colors">
+                GitHub
+              </span>
               <ArrowUpRight className="ml-auto size-4 text-[#9E9E9E] group-hover:text-[#5DD62C] transition-colors" />
             </a>
           )}
@@ -261,20 +265,15 @@ export function ContactForm() {
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-4 rounded-xl border border-[#2A2A2A] bg-[#202020] p-4 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_0_18px_rgba(93,214,44,0.12)] outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
-              aria-label="Visit LinkedIn Profile"
+              className="group flex items-center gap-4 rounded-xl border border-[#2A2A2A] bg-[#202020] p-4 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_0_18px_rgba(93,214,44,0.12)] outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
+              aria-label="Visit LinkedIn"
             >
               <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] text-[#5DD62C] transition-colors group-hover:border-[#5DD62C]/60">
                 <LinkedinIcon className="size-5" />
               </span>
-              <div className="space-y-1">
-                <div className="font-mono text-xs uppercase tracking-wider text-[#9E9E9E]">
-                  Professional Network
-                </div>
-                <div className="text-sm font-semibold text-[#F8F8F8] group-hover:text-[#5DD62C] transition-colors">
-                  LinkedIn Profile
-                </div>
-              </div>
+              <span className="text-sm font-semibold text-[#F8F8F8] group-hover:text-[#5DD62C] transition-colors">
+                LinkedIn
+              </span>
               <ArrowUpRight className="ml-auto size-4 text-[#9E9E9E] group-hover:text-[#5DD62C] transition-colors" />
             </a>
           )}
@@ -389,7 +388,7 @@ export function ContactForm() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="e.g. Sarah Connor"
+                  placeholder="Enter your name"
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? `${nameId}-error` : undefined}
                   className={`w-full rounded-xl border bg-[#0F0F0F] px-4 py-2.5 text-sm text-[#F8F8F8] placeholder-[#9E9E9E]/60 outline-hidden transition-colors ${
@@ -420,7 +419,7 @@ export function ContactForm() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="name@company.com"
+                  placeholder="Enter your email"
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? `${emailId}-error` : undefined}
                   className={`w-full rounded-xl border bg-[#0F0F0F] px-4 py-2.5 text-sm text-[#F8F8F8] placeholder-[#9E9E9E]/60 outline-hidden transition-colors ${
@@ -450,7 +449,7 @@ export function ContactForm() {
                   type="text"
                   value={formData.subject}
                   onChange={handleChange}
-                  placeholder="Project Consultation / Full-Stack Role"
+                  placeholder="Enter subject"
                   className="w-full rounded-xl border border-[#2A2A2A] bg-[#0F0F0F] px-4 py-2.5 text-sm text-[#F8F8F8] placeholder-[#9E9E9E]/60 outline-hidden transition-colors focus:border-[#5DD62C] focus:ring-1 focus:ring-[#5DD62C]"
                 />
               </div>
@@ -479,7 +478,7 @@ export function ContactForm() {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Describe your project, objectives, technical requirements, or inquiry..."
+                  placeholder="Message you want to send"
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? `${messageId}-error` : undefined}
                   className={`w-full rounded-xl border bg-[#0F0F0F] px-4 py-3 text-sm text-[#F8F8F8] placeholder-[#9E9E9E]/60 outline-hidden transition-colors resize-y ${

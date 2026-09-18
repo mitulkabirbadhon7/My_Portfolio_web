@@ -24,8 +24,24 @@ export async function GET(request: Request) {
 
     const cvUrl = typeof rawCvValue === "string" ? rawCvValue.trim() : "";
 
-    // If the documented CV URL field exists and contains a usable URL: redirect (HTTP 302) to it
+    // If the documented CV URL field exists and contains a usable URL: stream as PDF attachment or redirect
     if (cvUrl && (cvUrl.startsWith("http://") || cvUrl.startsWith("https://"))) {
+      try {
+        const fileRes = await fetch(cvUrl);
+        if (fileRes.ok) {
+          const buffer = await fileRes.arrayBuffer();
+          return new NextResponse(buffer, {
+            status: 200,
+            headers: {
+              "Content-Type": "application/pdf",
+              "Content-Disposition": 'attachment; filename="Mitu_Kabir_Badhon_CV.pdf"',
+              "Cache-Control": "public, max-age=3600",
+            },
+          });
+        }
+      } catch (streamErr) {
+        console.warn("[CV Route] Direct stream fallback to redirect:", streamErr);
+      }
       return NextResponse.redirect(cvUrl, { status: 302 });
     }
 

@@ -29,7 +29,7 @@ export class ApiError extends Error {
 // Base URL already includes /api/v1 per docs/CONFIG.md contract
 const RAW_API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
-const BASE_URL = RAW_API_URL.replace(/\/+$/, '');
+export const BASE_URL = RAW_API_URL.replace(/\/+$/, '');
 
 // ----------------------------------------------------------------------------
 // Body preparation — critical for FormData / multipart uploads
@@ -92,7 +92,18 @@ export async function apiClient<T>(
     config.credentials = 'include';
   }
 
-  const response = await fetch(url, config);
+  let response: Response;
+  try {
+    response = await fetch(url, config);
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error(`[API Network Error] Request to ${url} failed:`, err);
+    throw new ApiError(
+      `Network connection error: Unable to connect to backend server at ${url} (${errorMsg})`,
+      0,
+      { url, originalError: errorMsg }
+    );
+  }
 
   // Parse response — JSON or text
   let data: unknown;

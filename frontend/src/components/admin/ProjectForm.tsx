@@ -42,6 +42,7 @@ export function ProjectForm({ initialData, mode }: ProjectFormProps) {
   const [slug, setSlug] = useState(initialData?.slug || "");
   const [isSlugManuallyEdited, setIsSlugManuallyEdited] = useState(Boolean(initialData?.slug));
   const [description, setDescription] = useState(initialData?.description || "");
+  const [client, setClient] = useState(initialData?.client || "");
   const [content, setContent] = useState(initialData?.content || "");
   const [techStackInput, setTechStackInput] = useState(
     initialData?.techStack ? initialData.techStack.join(", ") : ""
@@ -131,6 +132,7 @@ export function ProjectForm({ initialData, mode }: ProjectFormProps) {
       title: title.trim(),
       slug: slug.trim(),
       description: description.trim(),
+      client: client.trim(),
       content: content.trim(),
       techStack,
       image: image.trim(),
@@ -302,6 +304,22 @@ export function ProjectForm({ initialData, mode }: ProjectFormProps) {
               disabled={isSubmitting}
               placeholder="Next.js, TypeScript, Tailwind CSS, Express, MongoDB"
               onChange={(e) => setTechStackInput(e.target.value)}
+              className="border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] placeholder:text-[#9E9E9E] focus-visible:border-[#5DD62C] focus-visible:ring-[#5DD62C]"
+            />
+          </div>
+
+          {/* Client / Organization */}
+          <div className="space-y-1.5">
+            <Label htmlFor="project-client" className="text-xs font-medium text-[#F8F8F8]">
+              Client / Organization <span className="text-xs text-[#9E9E9E] font-normal">(Optional, for Worldwide Clients tracking)</span>
+            </Label>
+            <Input
+              id="project-client"
+              name="client"
+              value={client}
+              disabled={isSubmitting}
+              placeholder="e.g. Enterprise Client, FinTech Global, Acme Corp"
+              onChange={(e) => setClient(e.target.value)}
               className="border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] placeholder:text-[#9E9E9E] focus-visible:border-[#5DD62C] focus-visible:ring-[#5DD62C]"
             />
           </div>

@@ -14,6 +14,7 @@ export interface Project {
   title: string;
   slug: string;
   description: string;
+  client?: string;
   content?: string;
   techStack: string[];
   image?: string;
@@ -48,6 +49,27 @@ export interface Settings {
   contactEmail?: string;
   githubUrl?: string;
   linkedinUrl?: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
+  clientsWorldwide?: string;
+  homeProfileImage?: string;
+  aboutProfileImage?: string;
+  universityImage?: string;
+  collegeImage?: string;
+  schoolImage?: string;
+  signatureImage?: string;
+  universityName?: string;
+  universityDegree?: string;
+  universityResult?: string;
+  universityYear?: string;
+  collegeName?: string;
+  collegeDegree?: string;
+  collegeResult?: string;
+  collegeYear?: string;
+  schoolName?: string;
+  schoolDegree?: string;
+  schoolResult?: string;
+  schoolYear?: string;
   updatedAt?: string;
 }
 

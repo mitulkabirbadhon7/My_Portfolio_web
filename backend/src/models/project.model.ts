@@ -4,6 +4,7 @@ export interface IProject extends Document {
   title: string;
   slug: string;
   description: string;
+  client?: string;
   content?: string;
   techStack: string[];
   image?: string;
@@ -31,6 +32,11 @@ const ProjectSchema: Schema = new Schema(
     description: {
       type: String,
       required: [true, 'Short description is required'],
+      trim: true,
+    },
+    client: {
+      type: String,
+      default: '',
       trim: true,
     },
     content: {
