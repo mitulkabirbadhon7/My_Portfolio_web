@@ -234,13 +234,14 @@ export default async function AboutPage() {
             </h2>
           </div>
 
-          <Link
+          <a
             href="/cv"
+            download="Mitu_Kabir_Badhon_CV.pdf"
             className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#9E9E9E] hover:text-[#5DD62C] transition-colors"
           >
-            <span>View CV Document</span>
+            <span>Download CV</span>
             <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
+          </a>
         </div>
 
         {/* Work Experiences (if present in database) */}

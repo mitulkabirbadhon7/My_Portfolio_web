@@ -8,6 +8,9 @@ const router = Router();
 // Public route to retrieve settings (including cvUrl, social links)
 router.get('/', settingsController.getSettings);
 
+// Public route to download CV as attachment with forced PDF headers
+router.get('/cv', settingsController.downloadCV);
+
 // Protected Admin routes
 router.put('/', protect, settingsController.updateSettings);
 router.post(

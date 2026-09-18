@@ -26,6 +26,32 @@ export class SettingsController {
     }
   };
 
+  downloadCV = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const settings = await settingsService.getSettings();
+      const cvUrl = settings.cvUrl?.trim();
+      if (!cvUrl) {
+        return res.status(404).json({
+          success: false,
+          message: 'CV not found',
+        });
+      }
+
+      const fileRes = await fetch(cvUrl);
+      if (!fileRes.ok) {
+        return res.redirect(cvUrl);
+      }
+
+      const arrayBuffer = await fileRes.arrayBuffer();
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'attachment; filename="Mitu_Kabir_Badhon_CV.pdf"');
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+      return res.send(Buffer.from(arrayBuffer));
+    } catch (error) {
+      next(error);
+    }
+  };
+
   uploadCV = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const settings = await settingsService.uploadCVFile(req.file);
