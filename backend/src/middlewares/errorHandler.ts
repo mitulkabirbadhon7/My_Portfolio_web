@@ -8,9 +8,15 @@ export const errorHandler = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
 ) => {
-  const isAppError = err instanceof AppError;
-  const statusCode = isAppError ? err.statusCode : 500;
-  const isOperational = isAppError ? err.isOperational : false;
+  const isAppError =
+    err instanceof AppError ||
+    (Boolean(err) && typeof err === 'object' && 'statusCode' in err && 'isOperational' in err);
+  const statusCode = isAppError
+    ? (err as AppError).statusCode
+    : (err as any)?.statusCode || 500;
+  const isOperational = isAppError
+    ? (err as AppError).isOperational
+    : Boolean((err as any)?.isOperational);
 
   // Fail-secure check: explicitly verify development environment
   const isDev = process.env.NODE_ENV === 'development';

@@ -32,14 +32,32 @@ const allowedOrigins = [
   'http://localhost:3001',
   'http://127.0.0.1:3000',
   'http://127.0.0.1:3001',
-  ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL.replace(/\/+$/, '')] : []),
+  'https://mitulkabirbadhon.me',
+  'https://www.mitulkabirbadhon.me',
+  ...(process.env.FRONTEND_URL
+    ? [
+        process.env.FRONTEND_URL.replace(/\/+$/, '').trim(),
+        process.env.FRONTEND_URL.replace(/\/+$/, '').trim().replace('https://', 'https://www.'),
+        process.env.FRONTEND_URL.replace(/\/+$/, '').trim().replace('https://www.', 'https://'),
+      ]
+    : []),
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
       // Allow requests with no origin (e.g. mobile apps, curl, server-to-server)
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      const normalizedOrigin = origin.replace(/\/+$/, '').trim();
+      const isAllowed =
+        allowedOrigins.includes(normalizedOrigin) ||
+        normalizedOrigin.endsWith('.mitulkabirbadhon.me') ||
+        normalizedOrigin.endsWith('.vercel.app');
+
+      if (isAllowed) {
         callback(null, true);
       } else if (process.env.NODE_ENV !== 'production') {
         // In local development, permit any local port while logging a warning

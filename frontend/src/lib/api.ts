@@ -27,9 +27,10 @@ export class ApiError extends Error {
 }
 
 // Base URL already includes /api/v1 per docs/CONFIG.md contract
-const RAW_API_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
-export const BASE_URL = RAW_API_URL.replace(/\/+$/, '');
+const RAW_API_URL = (
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'
+).trim();
+export const BASE_URL = RAW_API_URL.replace(/\/+$/, '').trim();
 
 // ----------------------------------------------------------------------------
 // Body preparation — critical for FormData / multipart uploads
@@ -63,9 +64,12 @@ export async function apiClient<T>(
 ): Promise<T> {
   const { auth = false, headers = {}, ...customConfig } = options;
 
-  // Normalize endpoint so it starts with '/'
-  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  const url = `${BASE_URL}${cleanEndpoint}`;
+  // Normalize endpoint so it starts with '/' and has no stray whitespace
+  const trimmedEndpoint = endpoint.trim();
+  const cleanEndpoint = trimmedEndpoint.startsWith('/')
+    ? trimmedEndpoint
+    : `/${trimmedEndpoint}`;
+  const url = `${BASE_URL}${cleanEndpoint}`.trim();
 
   // Build headers
   const requestHeaders: Record<string, string> = { ...headers };
