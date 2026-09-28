@@ -112,12 +112,6 @@ export function AboutBrief({ settings }: AboutBriefProps) {
                 <span className="text-[#5DD62C] font-medium">Available for consulting / roles</span>
               </div>
             </div>
-
-            {/* Hand-written style human note */}
-            <div className="p-4 rounded-lg border border-dashed border-[#2A2A2A] bg-[#181818] text-[#9E9E9E] text-xs font-mono flex items-center justify-between">
-              <span>&ldquo;Simplicity is prerequisite for reliability.&rdquo;</span>
-              <span className="text-[11px] text-[#5DD62C] font-serif italic">&mdash; Edsger Dijkstra</span>
-            </div>
           </div>
         </div>
       </div>
