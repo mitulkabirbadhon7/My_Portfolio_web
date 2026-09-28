@@ -131,11 +131,6 @@ export function HeroEditorial({ settings }: HeroEditorialProps) {
                 </div>
               )}
             </div>
-
-            {/* Editorial stamp/note on edge */}
-            <div className="absolute -bottom-2 -left-2 bg-[#0F0F0F] border border-[#337418] text-[#5DD62C] px-3 py-1 font-mono text-[10px] uppercase tracking-wider rounded-md hidden sm:block shadow-md">
-              Full-Stack &bull; 2026
-            </div>
           </div>
         </div>
       </div>
