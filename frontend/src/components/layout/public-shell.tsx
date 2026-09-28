@@ -17,11 +17,11 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground relative selection:bg-[#5DD62C]/20 selection:text-[#5DD62C]">
+    <div className="flex min-h-screen flex-col bg-background text-foreground relative w-full max-w-full overflow-x-clip selection:bg-[#5DD62C]/20 selection:text-[#5DD62C]">
       <ScrollProgress />
       <CustomCursor />
       <Navbar />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="flex-1 w-full max-w-full overflow-x-clip">
         {children}
       </main>
       <Footer />

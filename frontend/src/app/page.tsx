@@ -85,7 +85,7 @@ export default async function HomePage() {
   const { projects, skills, experiences, settings } = await getHomeData();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 overflow-x-clip">
       {/* 01: Hero Section with Asymmetrical Typography & Parallax Portrait */}
       <HeroEditorial settings={settings} />
 

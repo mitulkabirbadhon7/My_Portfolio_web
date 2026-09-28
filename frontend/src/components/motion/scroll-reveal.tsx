@@ -53,7 +53,7 @@ export function ScrollReveal({
   return (
     <div
       ref={ref}
-      className={`transition-all ${
+      className={`w-full max-w-full transition-all ${
         prefersReduced
           ? "opacity-100 transform-none"
           : "duration-[700ms] ease-[cubic-bezier(0.16,1,0.3,1)]"

@@ -101,13 +101,18 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     scroll-behavior: smooth;
+    overflow-x: clip;
+    max-width: 100%;
+    width: 100%;
   }
   body {
     background-color: var(--background);
     color: var(--foreground);
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
+    width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -187,6 +192,13 @@
   width: max-content;
   animation: marquee-right 32s linear infinite;
   will-change: transform;
+}
+
+.marquee-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  contain: paint;
 }
 
 .marquee-container:hover .marquee-track-left,

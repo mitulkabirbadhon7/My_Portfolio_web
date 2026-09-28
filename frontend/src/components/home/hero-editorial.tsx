@@ -96,7 +96,7 @@ export function HeroEditorial({ settings }: HeroEditorialProps) {
         {/* Right Column: Off-Center Asymmetrical Portrait (col-span-5) */}
         <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
           <div
-            className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2A2A] bg-[#202020] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.6)] lg:translate-x-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[#337418]"
+            className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2A2A] bg-[#202020] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[#337418]"
             style={{
               transform: `translate3d(0, ${parallaxOffset}px, 0)`,
             }}

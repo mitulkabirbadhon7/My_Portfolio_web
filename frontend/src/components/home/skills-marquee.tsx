@@ -44,9 +44,9 @@ export function SkillsMarquee({ skills = [] }: SkillsMarqueeProps) {
   return (
     <section
       aria-label="Skills & Technologies Marquee"
-      className="border-t border-[#2A2A2A] py-16 sm:py-24 overflow-hidden"
+      className="border-t border-[#2A2A2A] py-16 sm:py-24 w-full max-w-full overflow-hidden"
     >
-      <div className="space-y-8">
+      <div className="space-y-8 w-full max-w-full overflow-hidden">
         {/* Section Header */}
         <div className="flex items-center gap-3">
           <span className="font-mono text-xs uppercase tracking-widest text-[#5DD62C]">
@@ -56,8 +56,8 @@ export function SkillsMarquee({ skills = [] }: SkillsMarqueeProps) {
         </div>
 
         {/* Single Line Marquee Container */}
-        <div className="marquee-container pt-2">
-          <div className="overflow-hidden mask-fade-edges">
+        <div className="marquee-container pt-2 w-full max-w-full overflow-hidden">
+          <div className="w-full max-w-full overflow-hidden">
             <div className="marquee-track-left gap-3.5 py-1">
               {duplicatedSkills.map((skill, index) => (
                 <div
