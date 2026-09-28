@@ -4,7 +4,8 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { ChatWidget } from "@/components/public/ChatWidget";
+import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { CustomCursor } from "@/components/motion/custom-cursor";
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,10 +17,13 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#0F0F0F] text-[#F8F8F8] selection:bg-[#5DD62C]/20 selection:text-[#5DD62C]">
+    <div className="flex min-h-screen flex-col bg-background text-foreground relative selection:bg-[#5DD62C]/20 selection:text-[#5DD62C]">
+      <ScrollProgress />
+      <CustomCursor />
       <Navbar />
-      <div className="flex-1">{children}</div>
-      <ChatWidget />
+      <main id="main-content" className="flex-1">
+        {children}
+      </main>
       <Footer />
     </div>
   );

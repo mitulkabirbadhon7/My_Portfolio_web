@@ -8,138 +8,156 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
-  --color-text-primary: var(--text-primary);
-  --color-text-muted: var(--text-muted);
-  --color-border-accent: var(--border-accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-geist-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
   --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-border-card: var(--border);
+  --color-border-accent: var(--border-accent);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-muted);
+  --color-accent-green: var(--primary);
+  --color-accent-green-bright: #5DD62C;
+  --color-accent-green-deep: #337418;
+
+  --font-serif: var(--font-serif), "Newsreader", Georgia, serif;
+  --font-sans: var(--font-sans), "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono), monospace;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: #5DD62C;
+  --color-primary-foreground: #0F0F0F;
+  --color-secondary: #337418;
+  --color-secondary-foreground: #F8F8F8;
+  --color-muted: #202020;
+  --color-muted-foreground: #9E9E9E;
+  --color-accent: #337418;
+  --color-accent-foreground: #F8F8F8;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #F8F8F8;
+  --color-input: #2A2A2A;
+  --color-ring: #5DD62C;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
 }
 
 :root {
+  /* Restored Dark Palette with Neon/Emerald Accents */
   --background: #0F0F0F;
   --foreground: #F8F8F8;
   --surface: #202020;
-  --card: #202020;
-  --card-foreground: #F8F8F8;
-  --popover: #202020;
-  --popover-foreground: #F8F8F8;
+  --border: #2A2A2A;
+  --border-accent: #337418;
+  --text-primary: #F8F8F8;
+  --text-muted: #9E9E9E;
   --primary: #5DD62C;
   --primary-foreground: #0F0F0F;
   --secondary: #337418;
   --secondary-foreground: #F8F8F8;
-  --muted: #202020;
-  --muted-foreground: #9E9E9E;
   --accent: #337418;
   --accent-foreground: #F8F8F8;
+  --muted: #202020;
+  --muted-foreground: #9E9E9E;
   --destructive: #EF4444;
   --destructive-foreground: #F8F8F8;
-  --border: #2A2A2A;
-  --border-accent: #337418;
+  --card: #202020;
+  --card-foreground: #F8F8F8;
+  --popover: #202020;
+  --popover-foreground: #F8F8F8;
   --input: #2A2A2A;
   --ring: #5DD62C;
-  --text-primary: #F8F8F8;
-  --text-muted: #9E9E9E;
-  --chart-1: #5DD62C;
-  --chart-2: #337418;
-  --chart-3: #9E9E9E;
-  --chart-4: #2A2A2A;
-  --chart-5: #202020;
-  --radius: 0.625rem;
-  --sidebar: #202020;
-  --sidebar-foreground: #F8F8F8;
-  --sidebar-primary: #5DD62C;
-  --sidebar-primary-foreground: #0F0F0F;
-  --sidebar-accent: #337418;
-  --sidebar-accent-foreground: #F8F8F8;
-  --sidebar-border: #2A2A2A;
-  --sidebar-ring: #5DD62C;
+  --radius: 0.75rem;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dark {
   --background: #0F0F0F;
   --foreground: #F8F8F8;
   --surface: #202020;
-  --card: #202020;
-  --card-foreground: #F8F8F8;
-  --popover: #202020;
-  --popover-foreground: #F8F8F8;
+  --border: #2A2A2A;
+  --border-accent: #337418;
+  --text-primary: #F8F8F8;
+  --text-muted: #9E9E9E;
   --primary: #5DD62C;
   --primary-foreground: #0F0F0F;
   --secondary: #337418;
   --secondary-foreground: #F8F8F8;
-  --muted: #202020;
-  --muted-foreground: #9E9E9E;
-  --accent: #337418;
-  --accent-foreground: #F8F8F8;
-  --destructive: #EF4444;
-  --destructive-foreground: #F8F8F8;
-  --border: #2A2A2A;
-  --border-accent: #337418;
-  --input: #2A2A2A;
-  --ring: #5DD62C;
-  --text-primary: #F8F8F8;
-  --text-muted: #9E9E9E;
-  --sidebar: #202020;
-  --sidebar-foreground: #F8F8F8;
-  --sidebar-primary: #5DD62C;
-  --sidebar-primary-foreground: #0F0F0F;
-  --sidebar-accent: #337418;
-  --sidebar-accent-foreground: #F8F8F8;
-  --sidebar-border: #2A2A2A;
-  --sidebar-ring: #5DD62C;
+  --card: #202020;
+  --card-foreground: #F8F8F8;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+    border-color: var(--border);
+    outline-color: rgba(93, 214, 44, 0.4);
   }
   html {
-    @apply font-sans;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+
+  ::selection {
+    background-color: rgba(93, 214, 44, 0.22);
+    color: #5DD62C;
   }
 }
 
-@keyframes ticker {
+/* Editorial link with left-origin underline growth */
+.link-editorial {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-editorial::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background-color: #5DD62C;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-editorial:hover {
+  color: #5DD62C;
+}
+
+.link-editorial:hover::after {
+  transform: scaleX(1);
+}
+
+/* Horizontal Marquee Animation */
+@keyframes marquee-left {
   0% {
     transform: translateX(0);
   }
@@ -148,12 +166,46 @@
   }
 }
 
-.animate-ticker {
-  display: flex;
-  width: max-content;
-  animation: ticker 22s linear infinite;
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
-.animate-ticker:hover {
+.marquee-track-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 32s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right 32s linear infinite;
+  will-change: transform;
+}
+
+.marquee-container:hover .marquee-track-left,
+.marquee-container:hover .marquee-track-right {
   animation-play-state: paused;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track-left,
+  .marquee-track-right {
+    animation: none !important;
+  }
 }

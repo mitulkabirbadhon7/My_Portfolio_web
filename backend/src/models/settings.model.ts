@@ -14,6 +14,8 @@ export interface ISettings extends Document {
   facebookUrl?: string;
   instagramUrl?: string;
   clientsWorldwide?: string;
+  philosophyHeadline?: string;
+  philosophyBio?: string;
   universityName?: string;
   universityDegree?: string;
   universityResult?: string;
@@ -66,6 +68,16 @@ const SettingsSchema: Schema = new Schema(
       default: '+12',
       trim: true,
     },
+    philosophyHeadline: {
+      type: String,
+      default: 'I build web software with an emphasis on clarity, architectural durability, and zero superfluous fluff.',
+      trim: true,
+    },
+    philosophyBio: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     homeProfileImage: {
       type: String,
       default: '',
@@ -99,7 +111,7 @@ const SettingsSchema: Schema = new Schema(
     // Educational Milestones Information
     universityName: {
       type: String,
-      default: 'American International University-Bangladesh (AIUB)',
+      default: 'Daffodil International University (DIU)',
       trim: true,
     },
     universityDegree: {

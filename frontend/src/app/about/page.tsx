@@ -3,22 +3,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Briefcase,
   Calendar,
   Building2,
-  Code2,
   Sparkles,
   ArrowRight,
   User,
   GraduationCap,
   School,
+  FileDown,
 } from "lucide-react";
 import { Experience, Skill, Settings } from "@/types";
 
 export const metadata: Metadata = {
-  title: "About & Career Timeline | Mitul Kabir Badhon",
+  title: "About & Credentials — Mitul Kabir Badhon",
   description:
-    "Engineering background, career milestones, and technical capabilities of Mitul Kabir Badhon.",
+    "Engineering background, career milestones, academic credentials, and technical capabilities of Mitul Kabir Badhon.",
 };
 
 interface EducationItem {
@@ -31,7 +30,6 @@ interface EducationItem {
   image?: string;
 }
 
-// Helper to fetch Server Component initial public data
 async function getAboutData(): Promise<{
   experiences: Experience[];
   skills: Skill[];
@@ -108,12 +106,11 @@ function formatDateRange(startDate?: string, endDate?: string | null, current?: 
 export default async function AboutPage() {
   const { experiences, skills, settings } = await getAboutData();
 
-  // Educational milestones: University, College, School (Dynamic from Settings / Admin Panel)
   const educationData: EducationItem[] = [
     {
       id: "university",
       type: "university",
-      institution: settings?.universityName || "American International University-Bangladesh (AIUB)",
+      institution: settings?.universityName || "Daffodil International University (DIU)",
       degree: settings?.universityDegree || "B.Sc. in Computer Science & Engineering",
       result: settings?.universityResult || "CGPA 3.85 / 4.00",
       period: settings?.universityYear || "2020 – 2024",
@@ -139,16 +136,14 @@ export default async function AboutPage() {
     },
   ];
 
-  // Sort experiences chronologically: current positions first, then by startDate descending
   const sortedExperiences = experiences.slice().sort((a, b) => {
     if (a.current && !b.current) return -1;
     if (!a.current && b.current) return 1;
     return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
   });
 
-  // Group skills by category
   const groupedSkills = skills.reduce<Record<string, Skill[]>>((acc, skill) => {
-    const cat = skill.category?.trim() || "General Engineering";
+    const cat = skill.category?.trim() || "Core Engineering";
     if (!acc[cat]) {
       acc[cat] = [];
     }
@@ -159,57 +154,89 @@ export default async function AboutPage() {
   const hasSkills = Object.keys(groupedSkills).length > 0;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 space-y-16">
-      {/* =========================================================================
-          SECTION 1: HERO & PROFESSIONAL BIO
-          ========================================================================= */}
-      <section aria-label="Professional Bio" className="space-y-6">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#337418]/60 bg-[#202020] px-3 py-1 text-xs font-mono text-[#5DD62C]">
-          <span className="size-2 rounded-full bg-[#5DD62C] animate-pulse" />
-          <span>About &amp; Background</span>
+    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 space-y-20">
+      {/* SECTION 1: HERO & BIO */}
+      <section aria-label="Professional Bio" className="space-y-8">
+        <div className="inline-flex items-center gap-2">
+          <span className="size-2 rounded-full bg-[#5DD62C] shadow-[0_0_8px_rgba(93,214,44,0.6)]" />
+          <span className="font-mono text-xs uppercase tracking-widest text-[#5DD62C]">
+            Credentials &amp; History
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Headline and Detailed Engineering Bio */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 items-start">
           <div className="md:col-span-7 lg:col-span-8 space-y-6">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#F8F8F8] leading-[1.15]">
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-[#F8F8F8] leading-[1.08]">
               Engineering systems with precision, performance, and durability.
             </h1>
 
-            <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#9E9E9E]">
+            <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#9E9E9E] font-sans">
               <p>
-                I am <strong className="text-[#F8F8F8]">Mitul Kabir Badhon</strong>, a Full-Stack Software
+                I am <span className="font-sans font-bold text-[#F8F8F8]">Mitul Kabir</span>{" "}
+                <span className="font-sans font-bold text-[#5DD62C]">Badhon</span>, a Full-Stack Software
                 Engineer dedicated to constructing maintainable, resilient, and secure web applications.
                 My work emphasizes distributed architectures, production-grade TypeScript backends, and
-                high-contrast dark user interfaces.
+                tactile, uncluttered user interfaces.
               </p>
               <p>
-                With a foundation spanning server-side runtime performance, relational and document database
-                design, and modern client frameworks, I treat code clarity and architectural boundaries as
-                first-order design requirements.
+                With a rigorous foundation spanning server-side runtime performance, relational and
+                document database design, and modern client frameworks, I treat code clarity and
+                architectural boundaries as primary requirements.
               </p>
+            </div>
+
+            {/* Signature picture from backend */}
+            {settings?.signatureImage && (
+              <div className="pt-2 space-y-1.5">
+                <span className="block font-mono text-[11px] uppercase tracking-widest text-[#5DD62C]">
+                  Signature &bull; Autograph
+                </span>
+                <div className="relative h-20 w-60 rounded-xl border border-[#2A2A2A] bg-[#141414] p-2 overflow-hidden shadow-inner group hover:border-[#337418] transition-colors">
+                  <Image
+                    src={settings.signatureImage}
+                    alt="Signature of Mitul Kabir Badhon"
+                    fill
+                    sizes="240px"
+                    className="object-contain p-1 filter brightness-110"
+                    priority
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="pt-2 flex items-center gap-4">
+              <a
+                href="/cv"
+                download="Mitu_Kabir_Badhon_CV.pdf"
+                className="inline-flex items-center gap-2 rounded-lg border border-[#337418] bg-[#5DD62C] px-5 py-2.5 text-xs font-semibold text-[#0F0F0F] transition-all hover:bg-[#5DD62C]/90 hover:shadow-[0_0_20px_rgba(93,214,44,0.35)]"
+              >
+                <FileDown className="size-4" />
+                <span>Download Official CV (PDF)</span>
+              </a>
             </div>
           </div>
 
-          {/* Right Column: About Profile Image Box (Aligned with text block, elevated from lower position) */}
-          <div className="md:col-span-5 lg:col-span-4 self-start rounded-2xl border border-[#2A2A2A] bg-[#202020] p-3 sm:p-4 shadow-lg transition-colors hover:border-[#337418]/80">
-            <div className="relative aspect-4/5 w-full overflow-hidden rounded-xl border border-[#337418]/60 bg-[#0F0F0F] shadow-[0_0_20px_rgba(93,214,44,0.12)]">
+          <div className="md:col-span-5 lg:col-span-4 self-start rounded-xl border border-[#2A2A2A] bg-[#202020] p-3 shadow-2xl">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-[#0F0F0F]">
               {settings?.aboutProfileImage ? (
                 <Image
                   src={settings.aboutProfileImage}
                   alt="Mitul Kabir Badhon"
                   fill
                   sizes="(max-width: 768px) 100vw, 380px"
-                  className="object-cover object-top"
+                  className="object-cover object-top filter grayscale contrast-[1.05] hover:grayscale-0 transition-all duration-300"
                   priority
                 />
               ) : (
-                <div className="flex size-full flex-col items-center justify-center bg-gradient-to-b from-[#202020] to-[#0F0F0F] p-6 text-center text-[#9E9E9E]">
-                  <div className="flex size-16 items-center justify-center rounded-full bg-[#337418]/20 border border-[#337418]/40 text-[#5DD62C] mb-3">
-                    <User className="size-8" />
+                <div className="flex size-full flex-col items-center justify-center p-6 text-center text-[#9E9E9E] bg-gradient-to-b from-[#202020] to-[#0F0F0F]">
+                  <div className="flex size-14 items-center justify-center rounded-full bg-[#5DD62C]/10 text-[#5DD62C] mb-3 border border-[#337418]/40">
+                    <User className="size-7" />
                   </div>
-                  <span className="text-sm font-semibold text-[#F8F8F8]">Mitul Kabir Badhon</span>
-                  <span className="text-xs font-mono text-[#5DD62C] mt-1">Software Engineer</span>
+                  <div>
+                    <span className="font-sans font-bold text-lg text-[#F8F8F8]">Mitul Kabir</span>{" "}
+                    <span className="font-sans font-bold text-lg text-[#5DD62C]">Badhon</span>
+                  </div>
+                  <span className="font-mono text-xs text-[#5DD62C] mt-1">Full-Stack Engineer</span>
                 </div>
               )}
             </div>
@@ -217,36 +244,19 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* =========================================================================
-          SECTION 2: CAREER TIMELINE & EDUCATION
-          ========================================================================= */}
-      <section aria-labelledby="timeline-heading" className="space-y-6">
-        <div className="flex items-center justify-between">
+      {/* SECTION 2: TIMELINE & EDUCATION */}
+      <section aria-labelledby="timeline-heading" className="space-y-8 border-t border-[#2A2A2A] pt-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <Briefcase className="size-4 text-[#5DD62C]" />
-              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#5DD62C]">
-                Experience
-              </span>
-            </div>
-            <h2 id="timeline-heading" className="text-2xl sm:text-3xl font-bold text-[#F8F8F8]">
-              Career Timeline
+            <h2 id="timeline-heading" className="font-serif text-3xl sm:text-4xl font-medium text-[#F8F8F8]">
+              Career Timeline &amp; Academic Foundation
             </h2>
           </div>
-
-          <a
-            href="/cv"
-            download="Mitu_Kabir_Badhon_CV.pdf"
-            className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-[#9E9E9E] hover:text-[#5DD62C] transition-colors"
-          >
-            <span>Download CV</span>
-            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
-          </a>
         </div>
 
-        {/* Work Experiences (if present in database) */}
+        {/* Work Experiences */}
         {sortedExperiences.length > 0 && (
-          <div className="relative pl-6 sm:pl-8 ml-2 sm:ml-4 border-l-2 border-[#2A2A2A] space-y-8 mb-8">
+          <div className="relative pl-6 sm:pl-8 ml-2 sm:ml-4 border-l border-[#2A2A2A] space-y-8 mb-10">
             {sortedExperiences.map((exp) => {
               const isCurrent = exp.current || !exp.endDate;
               const dateRangeText = formatDateRange(exp.startDate, exp.endDate, exp.current);
@@ -254,28 +264,26 @@ export default async function AboutPage() {
               return (
                 <article
                   key={exp._id}
-                  className="relative group rounded-xl border border-[#2A2A2A] bg-[#202020] p-6 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_0_20px_rgba(93,214,44,0.1)]"
+                  className="relative group rounded-xl border border-[#2A2A2A] bg-[#202020] p-6 transition-all duration-200 hover:border-[#337418]"
                 >
                   <span
-                    className={`absolute -left-[31px] sm:-left-[39px] top-6 flex size-4 items-center justify-center rounded-full border-2 bg-[#0F0F0F] transition-colors ${
-                      isCurrent
-                        ? "border-[#5DD62C] shadow-[0_0_8px_rgba(93,214,44,0.6)]"
-                        : "border-[#9E9E9E]/60 group-hover:border-[#5DD62C]"
+                    className={`absolute -left-[31px] sm:-left-[39px] top-6 flex size-3.5 items-center justify-center rounded-full border-2 bg-[#0F0F0F] ${
+                      isCurrent ? "border-[#5DD62C]" : "border-[#2A2A2A]"
                     }`}
                   >
                     <span
                       className={`size-1.5 rounded-full ${
-                        isCurrent ? "bg-[#5DD62C] animate-pulse" : "bg-[#9E9E9E]/80"
+                        isCurrent ? "bg-[#5DD62C] animate-ping" : "bg-[#9E9E9E]"
                       }`}
                     />
                   </span>
 
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#2A2A2A] pb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#2A2A2A] pb-3">
                     <div>
-                      <h3 className="text-lg font-bold text-[#F8F8F8] transition-colors group-hover:text-[#5DD62C]">
+                      <h3 className="font-serif text-xl font-medium text-[#F8F8F8]">
                         {exp.role}
                       </h3>
-                      <div className="flex items-center gap-2 text-sm text-[#9E9E9E] mt-0.5">
+                      <div className="flex items-center gap-2 text-xs font-mono text-[#9E9E9E] mt-0.5">
                         <Building2 className="size-3.5 text-[#5DD62C]" />
                         <span className="font-medium text-[#F8F8F8]">{exp.company}</span>
                       </div>
@@ -285,7 +293,7 @@ export default async function AboutPage() {
                       <Calendar className="size-3.5" />
                       <span>{dateRangeText}</span>
                       {isCurrent && (
-                        <span className="rounded-full bg-[#5DD62C]/15 px-2 py-0.5 text-[10px] font-semibold text-[#5DD62C] border border-[#5DD62C]/30">
+                        <span className="rounded-full bg-[#5DD62C]/10 border border-[#337418]/60 px-2 py-0.5 text-[10px] font-semibold text-[#5DD62C]">
                           Current
                         </span>
                       )}
@@ -296,7 +304,7 @@ export default async function AboutPage() {
                     <ul className="mt-4 space-y-2 text-sm text-[#9E9E9E]">
                       {exp.description.map((bullet, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
-                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#5DD62C]" />
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#5DD62C] shadow-[0_0_6px_rgba(93,214,44,0.5)]" />
                           <span className="leading-relaxed">{bullet}</span>
                         </li>
                       ))}
@@ -308,8 +316,8 @@ export default async function AboutPage() {
           </div>
         )}
 
-        {/* Structured Vertical Education Cards Mapping over educationData */}
-        <div className="space-y-6">
+        {/* Structured Vertical Education Cards */}
+        <div className="space-y-4">
           {educationData.map((edu, index) => {
             const eduImage =
               edu.image ||
@@ -329,12 +337,11 @@ export default async function AboutPage() {
             return (
               <article
                 key={edu.id || index}
-                className="group rounded-2xl border border-[#2A2A2A] bg-[#202020] p-6 sm:p-7 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_0_20px_rgba(93,214,44,0.1)] flex flex-col sm:flex-row items-center justify-between gap-6"
+                className="group rounded-xl border border-[#2A2A2A] bg-[#202020] p-6 sm:p-7 transition-all duration-200 hover:border-[#337418] flex flex-col sm:flex-row items-center justify-between gap-6"
               >
-                {/* Left Side: Institution Name, Degree/Details, and Result */}
                 <div className="flex-1 space-y-2 text-center sm:text-left w-full">
                   <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                    <span className="inline-block rounded-full bg-[#5DD62C]/10 border border-[#5DD62C]/30 px-2.5 py-0.5 text-[11px] font-mono uppercase tracking-wider text-[#5DD62C]">
+                    <span className="rounded-full bg-[#0F0F0F] border border-[#2A2A2A] px-2.5 py-0.5 text-[11px] font-mono uppercase tracking-wider text-[#5DD62C]">
                       {edu.type}
                     </span>
                     {edu.period && (
@@ -344,32 +351,29 @@ export default async function AboutPage() {
                       </span>
                     )}
                   </div>
-                  <h3 className="text-xl font-bold text-[#F8F8F8] transition-colors group-hover:text-[#5DD62C]">
+                  <h3 className="font-serif text-xl sm:text-2xl font-medium text-[#F8F8F8]">
                     {edu.institution}
                   </h3>
-                  <p className="text-sm font-medium text-[#9E9E9E]">
-                    {edu.degree}
-                  </p>
-                  <div className="inline-flex items-center gap-1.5 rounded-md border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-1 text-xs font-mono text-[#F8F8F8]">
+                  <p className="text-sm text-[#9E9E9E]">{edu.degree}</p>
+                  <div className="inline-flex items-center gap-1.5 rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-2.5 py-1 text-xs font-mono text-[#F8F8F8]">
                     <span className="text-[#9E9E9E]">Result:</span>
                     <span className="font-semibold text-[#5DD62C]">{edu.result}</span>
                   </div>
                 </div>
 
-                {/* Right Side: Square or Rectangular Image Component */}
-                <div className="relative w-full sm:w-48 h-32 shrink-0 overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#0F0F0F] transition-colors group-hover:border-[#337418]">
+                <div className="relative w-full sm:w-44 h-28 shrink-0 overflow-hidden rounded-lg border border-[#2A2A2A] bg-[#0F0F0F]">
                   {eduImage ? (
                     <Image
                       src={eduImage}
                       alt={edu.institution}
                       fill
-                      sizes="(max-width: 640px) 100vw, 192px"
+                      sizes="(max-width: 640px) 100vw, 176px"
                       className="object-cover"
                     />
                   ) : (
-                    <div className="flex size-full flex-col items-center justify-center p-3 text-center text-[#9E9E9E] bg-gradient-to-b from-[#202020]/50 to-[#0F0F0F]">
-                      <Icon className="size-8 text-[#5DD62C]/70 mb-1.5" />
-                      <span className="text-[11px] font-mono text-[#9E9E9E] uppercase">
+                    <div className="flex size-full flex-col items-center justify-center p-3 text-center text-[#9E9E9E] bg-[#181818]">
+                      <Icon className="size-7 text-[#5DD62C] mb-1" />
+                      <span className="text-[10px] font-mono text-[#9E9E9E] uppercase">
                         {edu.type}
                       </span>
                     </div>
@@ -381,19 +385,11 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* =========================================================================
-          SECTION 3: SKILLS GROUPED BY CATEGORY WITH PROFICIENCY INDICATORS
-          ========================================================================= */}
-      <section aria-labelledby="skills-heading" className="space-y-6">
+      {/* SECTION 3: SKILLS MATRIX */}
+      <section aria-labelledby="skills-matrix-heading" className="space-y-6 border-t border-[#2A2A2A] pt-16">
         <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <Code2 className="size-4 text-[#5DD62C]" />
-            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#5DD62C]">
-              Capabilities
-            </span>
-          </div>
-          <h2 id="skills-heading" className="text-2xl sm:text-3xl font-bold text-[#F8F8F8]">
-            Categorized Skill Matrix
+          <h2 id="skills-matrix-heading" className="font-serif text-3xl sm:text-4xl font-medium text-[#F8F8F8]">
+            Categorized Technical Competencies
           </h2>
         </div>
 
@@ -405,19 +401,19 @@ export default async function AboutPage() {
                 className="rounded-xl border border-[#2A2A2A] bg-[#202020] p-6 space-y-4"
               >
                 <div className="flex items-center justify-between border-b border-[#2A2A2A] pb-3">
-                  <h3 className="font-mono text-sm font-semibold uppercase tracking-wider text-[#F8F8F8]">
+                  <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-[#F8F8F8]">
                     {category}
                   </h3>
                   <span className="text-xs font-mono text-[#9E9E9E]">
-                    {items.length} {items.length === 1 ? "Skill" : "Skills"}
+                    {items.length} {items.length === 1 ? "Item" : "Items"}
                   </span>
                 </div>
 
-                <div className="space-y-3.5">
+                <div className="space-y-3">
                   {items.map((skill) => {
                     const prof = typeof skill.proficiency === "number" ? skill.proficiency : 0;
                     return (
-                      <div key={skill._id} className="space-y-1.5">
+                      <div key={skill._id} className="space-y-1">
                         <div className="flex items-center justify-between text-xs font-medium">
                           <span className="text-[#F8F8F8]">{skill.name}</span>
                           <span className="font-mono text-[#5DD62C]">{prof}%</span>
@@ -431,7 +427,7 @@ export default async function AboutPage() {
                           className="h-1.5 w-full rounded-full bg-[#0F0F0F] overflow-hidden border border-[#2A2A2A]"
                         >
                           <div
-                            className="h-full rounded-full bg-gradient-to-r from-[#337418] to-[#5DD62C] transition-all duration-500"
+                            className="h-full rounded-full bg-[#5DD62C] shadow-[0_0_6px_rgba(93,214,44,0.5)] transition-all duration-500"
                             style={{ width: `${Math.min(Math.max(prof, 0), 100)}%` }}
                           />
                         </div>
@@ -451,27 +447,25 @@ export default async function AboutPage() {
         )}
       </section>
 
-      {/* =========================================================================
-          SECTION 4: NEXT STEPS / CTA
-          ========================================================================= */}
-      <section className="rounded-2xl border border-[#337418]/60 bg-gradient-to-r from-[#202020] via-[#202020] to-[#0F0F0F] p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      {/* SECTION 4: INVITATION CTA */}
+      <section className="rounded-2xl border border-[#2A2A2A] bg-[#202020] p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div className="space-y-2 text-center sm:text-left">
           <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5DD62C]">
             <Sparkles className="size-3.5" />
-            <span>Let&apos;s Build Together</span>
+            <span>Open to Dialogue</span>
           </div>
-          <h2 className="text-2xl font-bold text-[#F8F8F8]">
+          <h2 className="font-serif text-2xl sm:text-3xl font-medium text-[#F8F8F8]">
             Looking for a dedicated software engineer?
           </h2>
           <p className="text-sm text-[#9E9E9E] max-w-lg">
-            Whether for a full-time engineering role, consulting, or technical advisory, feel free to reach out.
+            Whether for a full-time engineering role, consulting, or technical advisory, let&apos;s discuss your goals.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-lg border border-[#337418] bg-[#5DD62C] px-5 py-2.5 text-sm font-semibold text-[#0F0F0F] transition-all hover:bg-[#5DD62C]/90 hover:shadow-[0_0_18px_rgba(93,214,44,0.35)]"
+            className="inline-flex items-center gap-2 rounded-lg border border-[#337418] bg-[#5DD62C] px-5 py-2.5 text-xs font-semibold text-[#0F0F0F] transition-all hover:bg-[#5DD62C]/90 hover:shadow-[0_0_20px_rgba(93,214,44,0.35)]"
           >
             <span>Get in Touch</span>
             <ArrowRight className="size-4" />
@@ -479,7 +473,7 @@ export default async function AboutPage() {
 
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-5 py-2.5 text-sm font-medium text-[#F8F8F8] transition-colors hover:border-[#5DD62C]"
+            className="inline-flex items-center gap-2 rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] px-5 py-2.5 text-xs font-medium text-[#F8F8F8] transition-colors hover:border-[#5DD62C] hover:text-[#5DD62C]"
           >
             <span>Explore Projects</span>
           </Link>

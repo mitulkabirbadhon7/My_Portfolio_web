@@ -1,17 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Newsreader, Inter, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { PublicShell } from "@/components/layout/public-shell";
+import { NoiseOverlay } from "@/components/ui/noise-overlay";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const newsreader = Newsreader({
+  variable: "--font-serif",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 // Production Canonical Domain from docs/CONFIG.md
@@ -20,20 +32,19 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mitulkabirbadhon.me
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Mitul Kabir Badhon | Software Engineer & Architect",
+    default: "Mitul Kabir Badhon — Software Engineer & Systems Architect",
     template: "%s | Mitul Kabir Badhon",
   },
   description:
-    "Full-stack software engineer specializing in scalable distributed architectures, Next.js, TypeScript, and modern high-performance web systems.",
+    "Personal portfolio and engineering log of Mitul Kabir Badhon. High-performance backends, clean TypeScript architecture, and deliberate digital craftsmanship.",
   keywords: [
+    "Mitul Kabir Badhon",
     "Software Engineer",
     "Full Stack Developer",
-    "Next.js",
     "TypeScript",
-    "React",
+    "Next.js",
     "Node.js",
-    "Tailwind CSS",
-    "System Design",
+    "Distributed Systems",
     "Portfolio",
   ],
   authors: [{ name: "Mitul Kabir Badhon", url: "https://github.com/mitulkabirbadhon7" }],
@@ -42,17 +53,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    title: "Mitul Kabir Badhon | Software Engineer & Architect",
+    title: "Mitul Kabir Badhon — Software Engineer & Systems Architect",
     description:
-      "Full-stack software engineer specializing in scalable distributed architectures, Next.js, TypeScript, and modern high-performance web systems.",
-    siteName: "Mitul Kabir Badhon Portfolio",
+      "Personal portfolio and engineering log of Mitul Kabir Badhon. High-performance backends, clean TypeScript architecture, and deliberate digital craftsmanship.",
+    siteName: "Mitul Kabir Badhon",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mitul Kabir Badhon | Software Engineer & Architect",
+    title: "Mitul Kabir Badhon — Software Engineer & Systems Architect",
     description:
-      "Full-stack software engineer specializing in scalable distributed architectures, Next.js, TypeScript, and modern high-performance web systems.",
+      "Personal portfolio and engineering log of Mitul Kabir Badhon. High-performance backends, clean TypeScript architecture, and deliberate digital craftsmanship.",
     creator: "@mitulkabir",
+  },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
   },
   robots: {
     index: true,
@@ -68,9 +84,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      className={`${newsreader.variable} ${inter.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground font-sans selection:bg-[#5DD62C]/20 selection:text-[#5DD62C]">
+        <NoiseOverlay />
         <Providers>
           <PublicShell>{children}</PublicShell>
         </Providers>

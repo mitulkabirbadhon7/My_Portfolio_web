@@ -13,6 +13,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -32,6 +33,7 @@ import {
   Building,
   School,
   PenTool,
+  Sparkles,
   X,
 } from "lucide-react";
 
@@ -109,6 +111,8 @@ export default function AdminSettingsAndCVPage() {
   const [facebookUrl, setFacebookUrl] = useState("");
   const [instagramUrl, setInstagramUrl] = useState("");
   const [clientsWorldwide, setClientsWorldwide] = useState("+12");
+  const [philosophyHeadline, setPhilosophyHeadline] = useState("");
+  const [philosophyBio, setPhilosophyBio] = useState("");
 
   // Educational Milestones state
   const [universityName, setUniversityName] = useState("");
@@ -174,8 +178,10 @@ export default function AdminSettingsAndCVPage() {
         setFacebookUrl(res.data.facebookUrl || "");
         setInstagramUrl(res.data.instagramUrl || "");
         setClientsWorldwide(res.data.clientsWorldwide || "+12");
+        setPhilosophyHeadline(res.data.philosophyHeadline || "I build web software with an emphasis on clarity, architectural durability, and zero superfluous fluff.");
+        setPhilosophyBio(res.data.philosophyBio || "");
 
-        setUniversityName(res.data.universityName || "American International University-Bangladesh (AIUB)");
+        setUniversityName(res.data.universityName || "Daffodil International University (DIU)");
         setUniversityDegree(res.data.universityDegree || "B.Sc. in Computer Science & Engineering");
         setUniversityResult(res.data.universityResult || "CGPA 3.85 / 4.00");
         setUniversityYear(res.data.universityYear || "2020 – 2024");
@@ -212,8 +218,10 @@ export default function AdminSettingsAndCVPage() {
           setFacebookUrl(res.data.facebookUrl || "");
           setInstagramUrl(res.data.instagramUrl || "");
           setClientsWorldwide(res.data.clientsWorldwide || "+12");
+          setPhilosophyHeadline(res.data.philosophyHeadline || "I build web software with an emphasis on clarity, architectural durability, and zero superfluous fluff.");
+          setPhilosophyBio(res.data.philosophyBio || "");
 
-          setUniversityName(res.data.universityName || "American International University-Bangladesh (AIUB)");
+          setUniversityName(res.data.universityName || "Daffodil International University (DIU)");
           setUniversityDegree(res.data.universityDegree || "B.Sc. in Computer Science & Engineering");
           setUniversityResult(res.data.universityResult || "CGPA 3.85 / 4.00");
           setUniversityYear(res.data.universityYear || "2020 – 2024");
@@ -388,6 +396,8 @@ export default function AdminSettingsAndCVPage() {
         facebookUrl: facebookUrl.trim(),
         instagramUrl: instagramUrl.trim(),
         clientsWorldwide: clientsWorldwide.trim(),
+        philosophyHeadline: philosophyHeadline.trim(),
+        philosophyBio: philosophyBio.trim(),
         universityName: universityName.trim(),
         universityDegree: universityDegree.trim(),
         universityResult: universityResult.trim(),
@@ -837,6 +847,74 @@ export default function AdminSettingsAndCVPage() {
         </form>
       </Card>
 
+      {/* Philosophy & Editorial Voice Section */}
+      <Card className="border border-[#2A2A2A] bg-[#202020] text-[#F8F8F8]">
+        <form onSubmit={handleSaveSettings} noValidate>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Sparkles className="size-5 text-[#5DD62C]" />
+              <CardTitle className="text-lg font-bold text-[#F8F8F8]">
+                Philosophy &amp; Editorial Voice
+              </CardTitle>
+            </div>
+            <CardDescription className="text-xs text-[#9E9E9E]">
+              Customize your headline statement, engineering craft principles, and bio displayed on the home page (&quot;Philosophy &amp; Voice&quot; section).
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="philosophy-headline" className="text-xs font-medium text-[#F8F8F8]">
+                Headline Statement
+              </Label>
+              <Input
+                id="philosophy-headline"
+                value={philosophyHeadline}
+                disabled={isSavingSettings}
+                placeholder="I build web software with an emphasis on clarity, architectural durability, and zero superfluous fluff."
+                onChange={(e) => setPhilosophyHeadline(e.target.value)}
+                className="border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] text-sm focus-visible:border-[#5DD62C] focus-visible:ring-[#5DD62C]"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="philosophy-bio" className="text-xs font-medium text-[#F8F8F8]">
+                Biography &amp; Craft Philosophy
+              </Label>
+              <Textarea
+                id="philosophy-bio"
+                value={philosophyBio}
+                disabled={isSavingSettings}
+                rows={5}
+                placeholder="Write your editorial bio, craft perspective, education story, and engineering focus here..."
+                onChange={(e) => setPhilosophyBio(e.target.value)}
+                className="border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] text-sm min-h-[120px] focus-visible:border-[#5DD62C] focus-visible:ring-[#5DD62C]"
+              />
+              <p className="text-[11px] text-[#9E9E9E]">
+                If left empty, a default narrative featuring your university ({universityName || "Daffodil International University (DIU)"}) will be rendered.
+              </p>
+            </div>
+          </CardContent>
+
+          <CardFooter className="border-t border-[#2A2A2A] pt-4">
+            <Button
+              type="submit"
+              disabled={isSavingSettings}
+              className="bg-[#5DD62C] font-semibold text-[#0F0F0F] hover:bg-[#5DD62C]/90 focus-visible:ring-2 focus-visible:ring-[#5DD62C] disabled:opacity-50"
+            >
+              {isSavingSettings ? (
+                "Saving..."
+              ) : (
+                <span className="flex items-center gap-1.5">
+                  <Save className="size-4" />
+                  Save Philosophy
+                </span>
+              )}
+            </Button>
+          </CardFooter>
+        </form>
+      </Card>
+
       {/* Educational Milestones Management Section */}
       <Card className="border border-[#2A2A2A] bg-[#202020] text-[#F8F8F8]">
         <form onSubmit={handleSaveSettings} noValidate>
@@ -868,7 +946,7 @@ export default function AdminSettingsAndCVPage() {
                     value={universityName}
                     disabled={isSavingSettings}
                     onChange={(e) => setUniversityName(e.target.value)}
-                    placeholder="e.g. American International University-Bangladesh (AIUB)"
+                    placeholder="e.g. Daffodil International University (DIU)"
                     className="border-[#2A2A2A] bg-[#202020] text-xs text-[#F8F8F8]"
                   />
                 </div>

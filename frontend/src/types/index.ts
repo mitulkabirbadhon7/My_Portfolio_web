@@ -52,6 +52,8 @@ export interface Settings {
   instagramUrl?: string;
   facebookUrl?: string;
   clientsWorldwide?: string;
+  philosophyHeadline?: string;
+  philosophyBio?: string;
   homeProfileImage?: string;
   aboutProfileImage?: string;
   universityImage?: string;

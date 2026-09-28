@@ -227,24 +227,24 @@ export function ChatWidget() {
           role="dialog"
           aria-modal="true"
           aria-label="Chat with AI Assistant"
-          className="mb-3 flex flex-col overflow-hidden rounded-2xl border border-[#337418] bg-[#202020] text-[#F8F8F8] shadow-2xl transition-all animate-in fade-in slide-in-from-bottom-5 duration-200 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[calc(100vh-6rem)]"
+          className="mb-3 flex flex-col overflow-hidden rounded-xl border border-[#E3E1DA] bg-white text-[#111110] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.1)] transition-all animate-in fade-in slide-in-from-bottom-5 duration-200 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[calc(100vh-6rem)]"
         >
           {/* Header */}
-          <header className="flex items-center justify-between border-b border-[#2A2A2A] bg-[#161616] px-4 py-3">
+          <header className="flex items-center justify-between border-b border-[#E3E1DA] bg-[#F4F3EF] px-4 py-3">
             <div className="flex items-center gap-3">
-              <div className="relative flex size-9 items-center justify-center rounded-xl border border-[#337418] bg-[#0F0F0F] text-[#5DD62C]">
-                <Bot className="size-5" />
+              <div className="relative flex size-8 items-center justify-center rounded-md border border-[#E3E1DA] bg-white text-[#1F7A4C]">
+                <Bot className="size-4" />
                 <span
                   aria-label="Online status"
-                  className="absolute -top-0.5 -right-0.5 size-2.5 rounded-full bg-[#5DD62C] ring-2 ring-[#161616] animate-pulse"
+                  className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-[#1F7A4C] ring-2 ring-white animate-pulse"
                 />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h2 className="text-sm font-bold text-[#F8F8F8]">AI Assistant</h2>
-                  <Sparkles className="size-3 text-[#5DD62C]" />
+                  <h2 className="font-serif text-sm font-semibold text-[#111110]">AI Assistant</h2>
+                  <Sparkles className="size-3 text-[#1F7A4C]" />
                 </div>
-                <p className="text-[11px] text-[#9E9E9E]">Gemini-Powered Ambassador</p>
+                <p className="font-mono text-[10px] text-[#6B6B66]">Interactive Ambassador</p>
               </div>
             </div>
 
@@ -254,7 +254,7 @@ export function ChatWidget() {
                 onClick={handleResetChat}
                 aria-label="Reset conversation"
                 title="Reset conversation"
-                className="rounded-lg p-1.5 text-[#9E9E9E] transition-colors hover:bg-[#202020] hover:text-[#F8F8F8] outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]"
+                className="rounded p-1.5 text-[#6B6B66] transition-colors hover:bg-white hover:text-[#111110] outline-hidden focus-visible:ring-1 focus-visible:ring-[#1F7A4C]"
               >
                 <RotateCcw className="size-3.5" />
               </button>
@@ -265,7 +265,7 @@ export function ChatWidget() {
                   triggerButtonRef.current?.focus();
                 }}
                 aria-label="Close chat window"
-                className="rounded-lg p-1.5 text-[#9E9E9E] transition-colors hover:bg-[#202020] hover:text-[#F8F8F8] outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]"
+                className="rounded p-1.5 text-[#6B6B66] transition-colors hover:bg-white hover:text-[#111110] outline-hidden focus-visible:ring-1 focus-visible:ring-[#1F7A4C]"
               >
                 <X className="size-4" />
               </button>
@@ -290,10 +290,10 @@ export function ChatWidget() {
                   {msg.sender === "ai" && (
                     <div
                       aria-hidden="true"
-                      className={`mb-1 flex size-6 shrink-0 items-center justify-center rounded-lg border ${
+                      className={`mb-1 flex size-6 shrink-0 items-center justify-center rounded-md border ${
                         msg.isError
-                          ? "border-red-500/60 bg-red-950/40 text-red-400"
-                          : "border-[#337418]/60 bg-[#0F0F0F] text-[#5DD62C]"
+                          ? "border-red-300 bg-red-50 text-red-600"
+                          : "border-[#E3E1DA] bg-white text-[#1F7A4C]"
                       }`}
                     >
                       {msg.isError ? (
@@ -306,16 +306,16 @@ export function ChatWidget() {
 
                   {/* Bubble */}
                   <div
-                    className={`rounded-2xl px-3.5 py-2.5 text-xs sm:text-sm leading-relaxed shadow-sm ${
+                    className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm leading-relaxed ${
                       msg.sender === "user"
-                        ? "rounded-tr-xs bg-[#337418] text-[#F8F8F8]"
+                        ? "rounded-tr-none bg-[#111110] text-[#F4F3EF]"
                         : msg.isError
-                        ? "rounded-tl-xs border border-red-500/40 bg-red-950/20 text-red-200"
-                        : "rounded-tl-xs border border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8]"
+                        ? "rounded-tl-none border border-red-200 bg-red-50 text-red-800"
+                        : "rounded-tl-none border border-[#E3E1DA] bg-[#F4F3EF] text-[#111110]"
                     }`}
                   >
                     {msg.sender === "ai" ? (
-                      <div className="prose prose-invert prose-xs max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-a:text-[#5DD62C] prose-a:underline hover:prose-a:text-[#5DD62C]/80 prose-strong:text-[#F8F8F8]">
+                      <div className="prose prose-xs max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-a:text-[#1F7A4C] prose-a:underline hover:prose-a:text-[#1F7A4C]/80 prose-strong:text-[#111110]">
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
@@ -324,7 +324,7 @@ export function ChatWidget() {
                                 {...props}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[#5DD62C] underline hover:text-[#5DD62C]/80"
+                                className="text-[#1F7A4C] underline hover:text-[#1F7A4C]/80"
                               />
                             ),
                           }}
@@ -340,14 +340,14 @@ export function ChatWidget() {
                   {msg.sender === "user" && (
                     <div
                       aria-hidden="true"
-                      className="mb-1 flex size-6 shrink-0 items-center justify-center rounded-lg bg-[#337418] text-[#F8F8F8]"
+                      className="mb-1 flex size-6 shrink-0 items-center justify-center rounded-md border border-[#E3E1DA] bg-[#F4F3EF] text-[#6B6B66]"
                     >
                       <User className="size-3.5" />
                     </div>
                   )}
                 </div>
 
-                <span className="mt-1 text-[10px] text-[#737373] px-8">
+                <span className="mt-1 text-[10px] text-[#6B6B66] px-8">
                   {msg.timestamp}
                 </span>
               </div>
@@ -355,14 +355,14 @@ export function ChatWidget() {
 
             {/* Typing Indicator */}
             {isLoading && (
-              <div className="flex items-center gap-2 text-xs text-[#9E9E9E] px-2 py-1">
-                <div className="flex size-6 items-center justify-center rounded-lg border border-[#337418]/60 bg-[#0F0F0F] text-[#5DD62C]">
-                  <Bot className="size-3.5 animate-pulse" />
+              <div className="flex items-center gap-2 text-xs text-[#6B6B66] px-2 py-1">
+                <div className="flex size-6 items-center justify-center rounded-md border border-[#E3E1DA] bg-white text-[#1F7A4C]">
+                  <Bot className="size-3.5" />
                 </div>
-                <div className="flex items-center gap-1 rounded-xl border border-[#2A2A2A] bg-[#0F0F0F] px-3 py-1.5">
-                  <span className="size-1.5 rounded-full bg-[#5DD62C] animate-bounce [animation-delay:-0.3s]" />
-                  <span className="size-1.5 rounded-full bg-[#5DD62C] animate-bounce [animation-delay:-0.15s]" />
-                  <span className="size-1.5 rounded-full bg-[#5DD62C] animate-bounce" />
+                <div className="flex items-center gap-1 rounded-xl border border-[#E3E1DA] bg-[#F4F3EF] px-3 py-1.5">
+                  <span className="size-1.5 rounded-full bg-[#1F7A4C] animate-bounce [animation-delay:-0.3s]" />
+                  <span className="size-1.5 rounded-full bg-[#1F7A4C] animate-bounce [animation-delay:-0.15s]" />
+                  <span className="size-1.5 rounded-full bg-[#1F7A4C] animate-bounce" />
                 </div>
               </div>
             )}
@@ -370,7 +370,7 @@ export function ChatWidget() {
             {/* Suggestion Pills (Shown when conversation is short) */}
             {messages.length <= 2 && !isLoading && (
               <div className="mt-3 pt-2">
-                <p className="mb-2 text-[11px] font-medium text-[#737373]">
+                <p className="mb-2 text-[11px] font-mono text-[#6B6B66] uppercase tracking-wider">
                   Suggested questions:
                 </p>
                 <div className="flex flex-col gap-1.5">
@@ -379,9 +379,9 @@ export function ChatWidget() {
                       key={pill}
                       type="button"
                       onClick={() => handlePillClick(pill)}
-                      className="inline-flex items-center justify-start gap-2 rounded-lg border border-[#2A2A2A] bg-[#161616] px-3 py-1.5 text-left text-xs text-[#9E9E9E] transition-all hover:border-[#5DD62C]/60 hover:bg-[#202020] hover:text-[#5DD62C] outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]"
+                      className="inline-flex items-center justify-start gap-2 rounded-md border border-[#E3E1DA] bg-white px-3 py-1.5 text-left text-xs text-[#6B6B66] transition-all hover:border-[#1F7A4C] hover:text-[#111110] outline-hidden focus-visible:ring-1 focus-visible:ring-[#1F7A4C]"
                     >
-                      <Sparkles className="size-3 text-[#5DD62C]" />
+                      <Sparkles className="size-3 text-[#1F7A4C]" />
                       <span>{pill}</span>
                     </button>
                   ))}
@@ -393,7 +393,7 @@ export function ChatWidget() {
           </div>
 
           {/* Input Form */}
-          <footer className="border-t border-[#2A2A2A] bg-[#161616] p-3">
+          <footer className="border-t border-[#E3E1DA] bg-[#F4F3EF] p-3">
             <form onSubmit={handleFormSubmit} className="flex items-center gap-2">
               <input
                 ref={inputRef}
@@ -404,14 +404,14 @@ export function ChatWidget() {
                 placeholder="Ask about my skills or work..."
                 aria-label="Message for AI Assistant"
                 disabled={isLoading}
-                className="flex-1 rounded-xl border border-[#2A2A2A] bg-[#0F0F0F] px-3.5 py-2 text-xs sm:text-sm text-[#F8F8F8] placeholder-[#737373] transition-colors outline-hidden focus:border-[#5DD62C] focus:ring-1 focus:ring-[#5DD62C] disabled:opacity-50"
+                className="flex-1 rounded-md border border-[#E3E1DA] bg-white px-3.5 py-2 text-xs sm:text-sm text-[#111110] placeholder-[#6B6B66]/60 transition-colors outline-hidden focus:border-[#1F7A4C] focus:ring-1 focus:ring-[#1F7A4C] disabled:opacity-50"
               />
 
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isLoading}
                 aria-label="Send message"
-                className="inline-flex size-9 items-center justify-center rounded-xl bg-[#5DD62C] text-[#0F0F0F] transition-all hover:bg-[#5DD62C]/90 hover:shadow-[0_0_12px_rgba(93,214,44,0.3)] disabled:cursor-not-allowed disabled:opacity-40 outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
+                className="inline-flex size-9 items-center justify-center rounded-md bg-[#111110] text-[#F4F3EF] transition-all hover:bg-[#1F7A4C] disabled:cursor-not-allowed disabled:opacity-40 outline-hidden focus-visible:ring-2 focus-visible:ring-[#1F7A4C]"
               >
                 <Send className="size-4" />
               </button>
@@ -429,16 +429,16 @@ export function ChatWidget() {
           aria-expanded={isOpen}
           aria-haspopup="dialog"
           aria-label={isOpen ? "Close AI Chat Assistant" : "Open AI Chat Assistant"}
-          className="group relative flex size-14 items-center justify-center rounded-full bg-[#5DD62C] text-[#0F0F0F] shadow-[0_0_20px_rgba(93,214,44,0.4)] transition-all duration-200 hover:scale-105 active:scale-95 outline-hidden focus-visible:ring-3 focus-visible:ring-[#5DD62C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F0F0F]"
+          className="group relative flex size-12 items-center justify-center rounded-full bg-[#111110] text-[#F4F3EF] border border-[#E3E1DA] shadow-md transition-all duration-200 hover:bg-[#1F7A4C] hover:scale-105 active:scale-95 outline-hidden focus-visible:ring-2 focus-visible:ring-[#1F7A4C]"
         >
           {isOpen ? (
-            <X className="size-6 transition-transform duration-200 rotate-0 group-hover:rotate-90" />
+            <X className="size-5 transition-transform duration-200 group-hover:rotate-90" />
           ) : (
             <>
-              <MessageSquare className="size-6 fill-[#0F0F0F]" />
+              <MessageSquare className="size-5" />
               <span
                 aria-hidden="true"
-                className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-[#0F0F0F] border border-[#5DD62C] text-[9px] font-bold text-[#5DD62C]"
+                className="absolute -top-1 -right-1 flex size-3.5 items-center justify-center rounded-full bg-[#1F7A4C] text-[8px] font-mono text-white"
               >
                 AI
               </span>
