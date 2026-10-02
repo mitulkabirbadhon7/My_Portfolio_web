@@ -17,17 +17,17 @@ export const protect = async (
   try {
     let token: string | undefined;
 
-    // 1. Check for token in cookies (Browser requests) OR Bearer header (API/CLI requests)
-    if (req.cookies && req.cookies.jwt) {
-      token = req.cookies.jwt;
-    } else if (
+    // 1. Check for token in Bearer header (primary/cross-origin) OR cookies (HttpOnly fallback)
+    if (
       req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer')
+      req.headers.authorization.startsWith('Bearer ')
     ) {
-      token = req.headers.authorization.split(' ')[1];
+      token = req.headers.authorization.split(' ')[1]?.trim();
+    } else if (req.cookies && req.cookies.jwt) {
+      token = req.cookies.jwt;
     }
 
-    if (!token) {
+    if (!token || token === 'logged_out') {
       return next(
         new AppError('You are not logged in. Please log in to get access.', 401),
       );

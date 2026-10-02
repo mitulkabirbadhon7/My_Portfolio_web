@@ -86,15 +86,26 @@ export async function apiClient<T>(
     requestHeaders['Content-Type'] = 'application/json';
   }
 
+  // Authenticated requests include HttpOnly cookies via credentials: "include"
+  // AND attach Bearer token from localStorage for bulletproof cross-origin / third-party-cookie resilience
+  if (auth) {
+    customConfig.credentials = 'include';
+    if (typeof window !== 'undefined') {
+      try {
+        const storedToken = localStorage.getItem('auth_token');
+        if (storedToken && !requestHeaders['Authorization']) {
+          requestHeaders['Authorization'] = `Bearer ${storedToken}`;
+        }
+      } catch {
+        // localStorage might be unavailable in restricted sandbox contexts
+      }
+    }
+  }
+
   const config: RequestInit = {
     ...customConfig,
     headers: requestHeaders,
   };
-
-  // Authenticated requests include HttpOnly cookies via credentials: "include"
-  if (auth) {
-    config.credentials = 'include';
-  }
 
   let response: Response;
   try {
@@ -129,6 +140,10 @@ export async function apiClient<T>(
 
   // Throw a typed error for non-2xx responses
   if (!response.ok) {
+    if (auth && response.status === 401 && typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('auth:unauthorized'));
+    }
+
     const message =
       data &&
       typeof data === 'object' &&

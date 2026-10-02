@@ -104,6 +104,7 @@ export interface ApiResponse<T = unknown> {
 
 export interface AuthResponse {
   success: boolean;
+  token?: string;
   user?: User;
   message?: string;
 }

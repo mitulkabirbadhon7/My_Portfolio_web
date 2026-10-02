@@ -365,13 +365,15 @@ export default function AdminSettingsAndCVPage() {
 
       if (res?.data?.cvUrl) {
         setSettings(res.data);
+        await refreshSettings();
         toast.success("CV uploaded successfully and synchronized with Cloudinary.");
         setSelectedFile(null);
         // Reset file input
         const input = document.getElementById("cv-file-input") as HTMLInputElement;
         if (input) input.value = "";
       } else {
-        fetchSettings();
+        await fetchSettings();
+        await refreshSettings();
         toast.success("CV upload completed.");
       }
     } catch (err) {

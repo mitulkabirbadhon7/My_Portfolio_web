@@ -8,6 +8,21 @@ export const errorHandler = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
 ) => {
+  // Handle Multer upload errors gracefully
+  if (err.name === 'MulterError') {
+    const multerErr = err as any;
+    let message = multerErr.message || 'File upload failed';
+    if (multerErr.code === 'LIMIT_FILE_SIZE') {
+      message = 'File is too large. Maximum allowed size is 5MB.';
+    } else if (multerErr.code === 'LIMIT_UNEXPECTED_FILE') {
+      message = `Unexpected upload field: ${multerErr.field || 'unknown'}.`;
+    }
+    return res.status(400).json({
+      success: false,
+      message,
+    });
+  }
+
   const isAppError =
     err instanceof AppError ||
     (Boolean(err) && typeof err === 'object' && 'statusCode' in err && 'isOperational' in err);
