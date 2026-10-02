@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { projectController } from '../controllers/project.controller';
-import { protect } from '../middlewares/auth.middleware';
+import { protect, optionalAuth } from '../middlewares/auth.middleware';
 
 const router = Router();
 
-// Public routes
-router.get('/', projectController.getAll);
-router.get('/:slug', projectController.getBySlug);
+// Public routes (with optional auth to detect Admin requesting drafts)
+router.get('/', optionalAuth, projectController.getAll);
+router.get('/:slug', optionalAuth, projectController.getBySlug);
 
 // Protected Admin routes
 router.post('/', protect, projectController.create);

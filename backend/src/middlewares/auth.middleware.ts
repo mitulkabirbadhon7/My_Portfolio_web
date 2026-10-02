@@ -62,3 +62,40 @@ export const protect = async (
     next(error);
   }
 };
+
+export const optionalAuth = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    let token: string | undefined;
+
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith('Bearer ')
+    ) {
+      token = req.headers.authorization.split(' ')[1]?.trim();
+    } else if (req.cookies && req.cookies.jwt) {
+      token = req.cookies.jwt;
+    }
+
+    if (token && token !== 'logged_out') {
+      try {
+        const decoded = jwt.verify(
+          token,
+          process.env.JWT_SECRET as string,
+        ) as JwtPayload;
+        const currentUser = await UserModel.findById(decoded.id);
+        if (currentUser) {
+          req.user = currentUser;
+        }
+      } catch {
+        // Token invalid/expired - proceed as guest
+      }
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};

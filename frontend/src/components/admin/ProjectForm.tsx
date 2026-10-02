@@ -50,7 +50,7 @@ export function ProjectForm({ initialData, mode }: ProjectFormProps) {
   const [image, setImage] = useState(initialData?.image || "");
   const [demoUrl, setDemoUrl] = useState(initialData?.demoUrl || "");
   const [repoUrl, setRepoUrl] = useState(initialData?.repoUrl || "");
-  const [isPublished, setIsPublished] = useState(initialData?.isPublished ?? false);
+  const [isPublished, setIsPublished] = useState(initialData?.isPublished ?? true);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
