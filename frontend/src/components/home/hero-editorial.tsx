@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Settings } from "@/types";
 import { MagneticButton } from "@/components/motion/magnetic-button";
+import { TechPortrait } from "@/components/home/tech-portrait";
 
 interface HeroEditorialProps {
   settings?: Settings | null;
@@ -48,9 +48,8 @@ export function HeroEditorial({ settings }: HeroEditorialProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         {/* Left Column: Asymmetrical Typography (col-span-7) */}
         <div className="lg:col-span-7 space-y-8 z-10">
-          {/* Status kicker */}
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-[#337418]/60 bg-[#202020] px-3 py-1">
-            <span className="size-2 rounded-full bg-[#5DD62C] animate-pulse" />
+          {/* Status kicker (No green dot as requested) */}
+          <div className="inline-flex items-center rounded-full border border-[#337418]/60 bg-[#202020] px-3.5 py-1">
             <span className="font-mono text-xs uppercase tracking-widest text-[#5DD62C]">
               Software Engineer &bull; Systems &bull; Web
             </span>
@@ -93,45 +92,13 @@ export function HeroEditorial({ settings }: HeroEditorialProps) {
           </div>
         </div>
 
-        {/* Right Column: Off-Center Asymmetrical Portrait (col-span-5) */}
+        {/* Right Column: Off-Center Asymmetrical Portrait with Tech HUD Animation (col-span-5) */}
         <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-          <div
-            className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[4/5] rounded-xl overflow-hidden border border-[#2A2A2A] bg-[#202020] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[#337418]"
-            style={{
-              transform: `translate3d(0, ${parallaxOffset}px, 0)`,
-            }}
-          >
-            <div className="relative size-full overflow-hidden rounded-lg bg-[#0F0F0F]">
-              {settings?.homeProfileImage ? (
-                <Image
-                  src={settings.homeProfileImage}
-                  alt="Mitul Kabir Badhon"
-                  fill
-                  sizes="(max-width: 768px) 340px, 380px"
-                  className="object-cover object-top transition-transform duration-500 hover:scale-102"
-                  priority
-                />
-              ) : (
-                <div className="size-full flex flex-col justify-between p-6 bg-gradient-to-b from-[#202020] to-[#0F0F0F]">
-                  <span className="font-mono text-[11px] uppercase tracking-widest text-[#5DD62C]">
-                    Profile
-                  </span>
-                  <div className="space-y-1 font-sans">
-                    <span className="font-bold text-2xl text-[#F8F8F8]">
-                      Mitul Kabir{" "}
-                    </span>
-                    <span className="font-bold text-2xl text-[#5DD62C]">
-                      Badhon
-                    </span>
-                    <p className="font-mono text-xs text-[#9E9E9E] pt-1">Dhaka, Bangladesh</p>
-                  </div>
-                  <div className="border-t border-[#2A2A2A] pt-3 text-[11px] font-mono text-[#9E9E9E]">
-                    Available for senior engineering roles
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          <TechPortrait
+            imageUrl={settings?.homeProfileImage}
+            alt="Mitul Kabir Badhon"
+            parallaxOffset={parallaxOffset}
+          />
         </div>
       </div>
     </section>

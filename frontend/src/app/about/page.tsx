@@ -5,7 +5,7 @@ import Image from "next/image";
 import {
   Calendar,
   Building2,
-  Sparkles,
+  Terminal,
   ArrowRight,
   User,
   GraduationCap,
@@ -13,6 +13,7 @@ import {
   FileDown,
 } from "lucide-react";
 import { Experience, Skill, Settings } from "@/types";
+import { TechPortrait } from "@/components/home/tech-portrait";
 
 export const metadata: Metadata = {
   title: "About & Credentials — Mitul Kabir Badhon",
@@ -158,7 +159,6 @@ export default async function AboutPage() {
       {/* SECTION 1: HERO & BIO */}
       <section aria-label="Professional Bio" className="space-y-8">
         <div className="inline-flex items-center gap-2">
-          <span className="size-2 rounded-full bg-[#5DD62C] shadow-[0_0_8px_rgba(93,214,44,0.6)]" />
           <span className="font-mono text-xs uppercase tracking-widest text-[#5DD62C]">
             Credentials &amp; History
           </span>
@@ -216,30 +216,11 @@ export default async function AboutPage() {
             </div>
           </div>
 
-          <div className="md:col-span-5 lg:col-span-4 self-start rounded-xl border border-[#2A2A2A] bg-[#202020] p-3 shadow-2xl">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-[#0F0F0F]">
-              {settings?.aboutProfileImage ? (
-                <Image
-                  src={settings.aboutProfileImage}
-                  alt="Mitul Kabir Badhon"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 380px"
-                  className="object-cover object-top filter grayscale contrast-[1.05] hover:grayscale-0 transition-all duration-300"
-                  priority
-                />
-              ) : (
-                <div className="flex size-full flex-col items-center justify-center p-6 text-center text-[#9E9E9E] bg-gradient-to-b from-[#202020] to-[#0F0F0F]">
-                  <div className="flex size-14 items-center justify-center rounded-full bg-[#5DD62C]/10 text-[#5DD62C] mb-3 border border-[#337418]/40">
-                    <User className="size-7" />
-                  </div>
-                  <div>
-                    <span className="font-sans font-bold text-lg text-[#F8F8F8]">Mitul Kabir</span>{" "}
-                    <span className="font-sans font-bold text-lg text-[#5DD62C]">Badhon</span>
-                  </div>
-                  <span className="font-mono text-xs text-[#5DD62C] mt-1">Full-Stack Engineer</span>
-                </div>
-              )}
-            </div>
+          <div className="md:col-span-5 lg:col-span-4 self-start flex justify-center">
+            <TechPortrait
+              imageUrl={settings?.aboutProfileImage}
+              alt="Mitul Kabir Badhon"
+            />
           </div>
         </div>
       </section>
@@ -451,7 +432,7 @@ export default async function AboutPage() {
       <section className="rounded-2xl border border-[#2A2A2A] bg-[#202020] p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div className="space-y-2 text-center sm:text-left">
           <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5DD62C]">
-            <Sparkles className="size-3.5" />
+            <Terminal className="size-3.5" />
             <span>Open to Dialogue</span>
           </div>
           <h2 className="font-serif text-2xl sm:text-3xl font-medium text-[#F8F8F8]">

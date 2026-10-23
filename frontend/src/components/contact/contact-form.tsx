@@ -10,6 +10,7 @@ import {
   ArrowUpRight,
   Loader2,
   RefreshCw,
+  Terminal,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useSettings } from "@/context/settings-context";
@@ -188,7 +189,7 @@ export function ContactForm() {
       <div className="lg:col-span-5 space-y-8">
         <div className="space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#337418]/60 bg-[#202020] px-3 py-1">
-            <span className="size-2 rounded-full bg-[#5DD62C] animate-pulse" />
+            <Terminal className="size-3 text-[#5DD62C]" />
             <span className="font-mono text-xs uppercase tracking-widest text-[#5DD62C]">
               Direct Inquiries
             </span>
@@ -234,7 +235,7 @@ export function ContactForm() {
         <div className="rounded-2xl border border-[#2A2A2A] bg-[#202020] p-6 sm:p-8 shadow-xl">
           <div className="flex items-center justify-between border-b border-[#2A2A2A] pb-4 mb-6">
             <div className="flex items-center gap-2">
-              <span className="size-2 rounded-full bg-[#5DD62C]" />
+              <Terminal className="size-3 text-[#5DD62C]" />
               <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#F8F8F8]">
                 Message Dispatch
               </span>

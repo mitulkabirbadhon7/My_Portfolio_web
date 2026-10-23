@@ -208,12 +208,34 @@ export default async function ProjectDetailPage({
           HERO COVER IMAGE
           ========================================================================= */}
       {project.image ? (
-        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-[#2A2A2A] bg-[#202020] shadow-2xl">
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-[#2A2A2A] bg-[#202020] shadow-2xl group">
+          {/* Tech HUD corner reticles */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-3 left-3 size-4 border-t-2 border-l-2 border-[#5DD62C] opacity-70 z-10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-3 right-3 size-4 border-t-2 border-r-2 border-[#5DD62C] opacity-70 z-10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-3 left-3 size-4 border-b-2 border-l-2 border-[#5DD62C] opacity-70 z-10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-3 right-3 size-4 border-b-2 border-r-2 border-[#5DD62C] opacity-70 z-10"
+          />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={project.image}
             alt={`${project.title} hero mockup`}
-            className="h-full w-full object-cover object-center"
+            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.01]"
+          />
+          {/* Technical scanning line */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 h-16 bg-gradient-to-b from-transparent via-[#5DD62C]/10 to-transparent tech-scan-beam"
           />
         </div>
       ) : (

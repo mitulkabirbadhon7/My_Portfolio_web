@@ -93,7 +93,6 @@ export function Navbar() {
             <span className="font-mono text-xs font-bold tracking-tighter text-[#F8F8F8]">
               MK<span className="text-[#5DD62C]">B</span>
             </span>
-            <span className="absolute -top-0.5 -right-0.5 size-1.5 rounded-full bg-[#5DD62C] shadow-[0_0_6px_rgba(93,214,44,0.8)]" />
           </div>
           <div className="flex items-center gap-1 font-sans font-bold text-xs sm:text-base tracking-tight whitespace-nowrap">
             <span className="text-[#F8F8F8]">Mitul Kabir</span>

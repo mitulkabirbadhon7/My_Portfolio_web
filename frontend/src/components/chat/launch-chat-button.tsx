@@ -28,7 +28,7 @@ export function LaunchChatButton({ children, className }: LaunchChatButtonProps)
       type="button"
       onClick={handleClick}
       className={className}
-      aria-label="Launch interactive AI assistant"
+      aria-label="Launch interactive assistant"
     >
       {children}
     </button>

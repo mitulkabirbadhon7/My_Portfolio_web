@@ -263,10 +263,13 @@ export function ProjectsGallery() {
         </div>
       )}
 
-      {/* RESPONSIVE PROJECTS GRID */}
+      {/* RESPONSIVE PROJECTS GRID WITH TECH-CALIBRATED ANIMATION */}
       {!loading && filteredProjects.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => {
+        <div
+          key={selectedTech}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {filteredProjects.map((project, idx) => {
             const coreTechTags = (project.techStack || [])
               .map((t) => normalizeCoreTechName(t))
               .filter((t): t is string => Boolean(t));
@@ -281,18 +284,38 @@ export function ProjectsGallery() {
               <Link
                 key={project._id}
                 href={`/projects/${project.slug || project._id}`}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#202020] p-5 transition-all duration-200 hover:border-[#337418] hover:shadow-[0_12px_32px_-12px_rgba(93,214,44,0.18)] hover:-translate-y-1 outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
+                style={{
+                  animationDelay: `${idx * 45}ms`,
+                }}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#202020] p-5 transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[#337418] hover:shadow-[0_12px_32px_-12px_rgba(93,214,44,0.2)] hover:-translate-y-1 outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C] animate-project-card"
               >
+                {/* Tech HUD Corner Reticles (Top-Left & Bottom-Right) */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute top-2.5 left-2.5 size-2.5 border-t border-l border-[#5DD62C] opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute bottom-2.5 right-2.5 size-2.5 border-b border-r border-[#5DD62C] opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                />
+
                 {/* Image */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-[#2A2A2A] bg-[#0F0F0F] mb-4">
                   {project.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={project.image}
-                      alt={`${project.title} preview`}
-                      className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-102"
-                      loading="lazy"
-                    />
+                    <>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        className="h-full w-full object-cover object-center transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-102"
+                        loading="lazy"
+                      />
+                      {/* Technical Scanline Sweep on Card Hover */}
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 h-10 bg-gradient-to-b from-transparent via-[#5DD62C]/15 to-transparent opacity-0 group-hover:opacity-100 tech-scan-beam"
+                      />
+                    </>
                   ) : (
                     <div className="flex size-full flex-col items-center justify-center p-4 text-center text-[#9E9E9E] bg-[#181818]">
                       <FolderKanban className="size-8 text-[#5DD62C]/60 mb-2" />
@@ -305,7 +328,7 @@ export function ProjectsGallery() {
 
                 {/* Subtitle & Title */}
                 <div className="space-y-2">
-                  <div className="font-mono text-[11px] tracking-wider text-[#9E9E9E]">
+                  <div className="font-mono text-[11px] tracking-wider text-[#9E9E9E] group-hover:text-[#5DD62C]/90 transition-colors">
                     {subtitle}
                   </div>
 
@@ -313,7 +336,7 @@ export function ProjectsGallery() {
                     <h3 className="font-serif text-xl font-medium tracking-tight text-[#F8F8F8] transition-colors group-hover:text-[#5DD62C]">
                       {project.title}
                     </h3>
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] transition-colors group-hover:border-[#5DD62C] group-hover:text-[#5DD62C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] transition-all duration-200 group-hover:border-[#5DD62C] group-hover:text-[#5DD62C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_8px_rgba(93,214,44,0.3)]">
                       <ArrowUpRight className="size-3.5" />
                     </span>
                   </div>

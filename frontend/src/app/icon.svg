@@ -3,5 +3,4 @@
   <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" fill="none" stroke="#2A2A2A"/>
   <text x="7" y="21" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="13" letter-spacing="-0.5" fill="#F8F8F8">M</text>
   <text x="18" y="21" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="13" letter-spacing="-0.5" fill="#5DD62C">B</text>
-  <circle cx="27" cy="5" r="2.5" fill="#5DD62C"/>
 </svg>

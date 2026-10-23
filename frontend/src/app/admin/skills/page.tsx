@@ -30,7 +30,6 @@ import {
   Wrench,
   AlertCircle,
   Save,
-  Sparkles,
 } from "lucide-react";
 
 export default function AdminSkillsPage() {
@@ -282,7 +281,7 @@ export default function AdminSkillsPage() {
                 <CardHeader className="border-b border-[#2A2A2A] bg-[#0F0F0F]/40 pb-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="size-4 text-[#5DD62C]" />
+                      <Wrench className="size-4 text-[#5DD62C]" />
                       <CardTitle className="text-base font-bold text-[#F8F8F8]">{cat}</CardTitle>
                     </div>
                     <span className="font-mono text-xs text-[#9E9E9E]">

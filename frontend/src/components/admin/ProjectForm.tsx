@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { ArrowLeft, Save, Sparkles } from "lucide-react";
+import { ArrowLeft, Save, RefreshCw } from "lucide-react";
 
 interface ProjectFormProps {
   initialData?: Project;
@@ -217,7 +217,7 @@ export function ProjectForm({ initialData, mode }: ProjectFormProps) {
               name="title"
               value={title}
               disabled={isSubmitting}
-              placeholder="e.g. Modern AI Portfolio Platform"
+              placeholder="e.g. Distributed Cloud Systems Platform"
               onChange={handleTitleChange}
               aria-invalid={!!fieldErrors.title}
               aria-describedby={fieldErrors.title ? "project-title-error" : undefined}
@@ -241,7 +241,7 @@ export function ProjectForm({ initialData, mode }: ProjectFormProps) {
                 onClick={handleAutoSlug}
                 className="inline-flex items-center gap-1 text-xs font-mono text-[#5DD62C] hover:underline"
               >
-                <Sparkles className="size-3" />
+                <RefreshCw className="size-3" />
                 Regenerate from Title
               </button>
             </div>
@@ -250,7 +250,7 @@ export function ProjectForm({ initialData, mode }: ProjectFormProps) {
               name="slug"
               value={slug}
               disabled={isSubmitting}
-              placeholder="e.g. modern-ai-portfolio-platform"
+              placeholder="e.g. distributed-cloud-systems-platform"
               onChange={handleSlugChange}
               aria-invalid={!!fieldErrors.slug}
               aria-describedby={fieldErrors.slug ? "project-slug-error" : undefined}

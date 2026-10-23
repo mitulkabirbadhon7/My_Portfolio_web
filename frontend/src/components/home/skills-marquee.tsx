@@ -64,7 +64,7 @@ export function SkillsMarquee({ skills = [] }: SkillsMarqueeProps) {
                   key={`skill-${index}`}
                   className="group inline-flex items-center gap-2.5 rounded-full border border-[#2A2A2A] bg-[#202020] px-5 py-2 text-xs sm:text-sm font-medium text-[#F8F8F8] transition-colors duration-200 hover:border-[#5DD62C] hover:text-[#5DD62C] select-none cursor-default shrink-0"
                 >
-                  <span className="size-1.5 rounded-full bg-[#5DD62C]/60 group-hover:bg-[#5DD62C] shadow-[0_0_6px_rgba(93,214,44,0.5)] transition-colors" />
+                  <span className="font-mono text-xs text-[#5DD62C]/70 group-hover:text-[#5DD62C] transition-colors select-none">#</span>
                   <span>{skill}</span>
                 </div>
               ))}

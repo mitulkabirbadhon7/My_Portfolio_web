@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
-import { Sparkles, Code2, Layers } from "lucide-react";
+import { Terminal, ArrowUpRight, Code2, Layers } from "lucide-react";
 import { Project } from "@/types";
 
 interface ProjectShowcaseCardProps {
@@ -127,7 +127,7 @@ export function ProjectShowcaseCard({ projects }: ProjectShowcaseCardProps) {
               />
             ) : (
               <div className="size-full flex flex-col items-center justify-center p-1 text-center">
-                <Sparkles className="size-4 text-[#5DD62C] mb-1" />
+                <Terminal className="size-4 text-[#5DD62C] mb-1" />
                 <span className="text-[8px] font-mono text-[#F8F8F8]">Mobile &amp; APIs</span>
               </div>
             )}
@@ -172,9 +172,9 @@ export function ProjectShowcaseCard({ projects }: ProjectShowcaseCardProps) {
           </h3>
         </div>
 
-        {/* Target / Sparkle Icon */}
+        {/* Target / Arrow Icon */}
         <span className="flex size-10 items-center justify-center rounded-full border border-[#2A2A2A] bg-[#0F0F0F] text-[#9E9E9E] transition-all duration-200 group-hover:border-[#5DD62C] group-hover:text-[#5DD62C] group-hover:scale-110">
-          <Sparkles className="size-4 text-[#5DD62C]" />
+          <ArrowUpRight className="size-4 text-[#5DD62C]" />
         </span>
       </div>
     </Link>

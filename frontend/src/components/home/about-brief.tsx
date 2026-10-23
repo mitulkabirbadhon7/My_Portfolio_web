@@ -84,7 +84,6 @@ export function AboutBrief({ settings }: AboutBriefProps) {
             <div className="rounded-xl border border-[#2A2A2A] bg-[#202020] p-6 sm:p-7 shadow-xl space-y-5">
               <div className="flex items-center justify-between border-b border-[#2A2A2A] pb-3">
                 <div className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-[#5DD62C] animate-pulse shadow-[0_0_8px_rgba(93,214,44,0.6)]" />
                   <span className="font-mono text-xs uppercase tracking-wider text-[#F8F8F8] font-semibold">
                     Currently
                   </span>

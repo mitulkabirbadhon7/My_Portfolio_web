@@ -4,12 +4,10 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
-  MessageSquare,
   X,
   Send,
-  Bot,
+  Terminal,
   User,
-  Sparkles,
   AlertTriangle,
   RotateCcw,
 } from "lucide-react";
@@ -30,20 +28,20 @@ interface BackendHistoryItem {
 }
 
 const SUGGESTION_PILLS = [
-  "What tech stack do you use?",
-  "Tell me about your projects",
-  "How can I contact you?",
+  "query --stack (Tech stack & system architecture)",
+  "query --projects (Production systems & case studies)",
+  "query --contact (Engineering roles & inquiries)",
 ];
 
 const INITIAL_WELCOME_TEXT =
-  "Hello! I am Mitul's interactive AI assistant. Ask me anything about my projects, tech stack, architecture decisions, or experience!";
+  "Interactive Engineering Console initialized. Query technical stack, backend architectures, system design decisions, or project case studies.";
 
 const INITIAL_MESSAGES: ChatMessage[] = [
   {
     id: "welcome-1",
     sender: "ai",
     text: INITIAL_WELCOME_TEXT,
-    timestamp: "Online",
+    timestamp: "READY",
   },
 ];
 
@@ -160,11 +158,11 @@ export function ChatWidget() {
           };
           setMessages((prev) => [...prev, aiResponse]);
         } else {
-          throw new Error("No response payload received from AI service");
+          throw new Error("No response payload received from console service");
         }
       } catch (err: unknown) {
         let friendlyError =
-          "The AI assistant is temporarily unavailable. Please try again or reach out directly via the Contact page.";
+          "The interactive console is temporarily offline. Please try again or reach out directly via the Contact page.";
 
         if (err instanceof ApiError) {
           if (err.status === 400) {
@@ -173,13 +171,13 @@ export function ChatWidget() {
                 ? String((err.data as { message: unknown }).message)
                 : "Please enter a valid message (maximum 1000 characters).";
           } else if (err.status === 401) {
-            friendlyError = "Unauthorized chat request. Please refresh the page.";
+            friendlyError = "Unauthorized request. Please refresh the page.";
           } else if (err.status === 429) {
             friendlyError =
-              "Rate limit reached. You have sent too many messages recently. Please wait a moment before trying again.";
+              "Rate limit reached. You have sent too many queries recently. Please wait a moment before trying again.";
           } else if (err.status >= 500) {
             friendlyError =
-              "AI service is experiencing high traffic. Please try again in a few moments.";
+              "Console service is experiencing high load. Please try again in a few moments.";
           }
         } else if (err instanceof Error && err.message) {
           friendlyError = err.message;
@@ -218,33 +216,31 @@ export function ChatWidget() {
 
   return (
     <aside
-      aria-label="Interactive AI Assistant"
+      aria-label="Interactive Console"
       className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 font-sans"
     >
-      {/* Floating Chat Window */}
+      {/* Floating Chat Window (Engineered Terminal Console) */}
       {isOpen && (
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Chat with AI Assistant"
-          className="mb-3 flex flex-col overflow-hidden rounded-xl border border-[#E3E1DA] bg-white text-[#111110] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.1)] transition-all animate-in fade-in slide-in-from-bottom-5 duration-200 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[calc(100vh-6rem)]"
+          aria-label="Interactive Engineering Console"
+          className="mb-3 flex flex-col overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-all animate-in fade-in slide-in-from-bottom-5 duration-200 w-[calc(100vw-2rem)] sm:w-[400px] h-[520px] max-h-[calc(100vh-6rem)]"
         >
           {/* Header */}
-          <header className="flex items-center justify-between border-b border-[#E3E1DA] bg-[#F4F3EF] px-4 py-3">
+          <header className="flex items-center justify-between border-b border-[#2A2A2A] bg-[#141414] px-4 py-3">
             <div className="flex items-center gap-3">
-              <div className="relative flex size-8 items-center justify-center rounded-md border border-[#E3E1DA] bg-white text-[#1F7A4C]">
-                <Bot className="size-4" />
-                <span
-                  aria-label="Online status"
-                  className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-[#1F7A4C] ring-2 ring-white animate-pulse"
-                />
+              <div className="relative flex size-8 items-center justify-center rounded-md border border-[#337418] bg-[#0F0F0F] text-[#5DD62C] shadow-[0_0_8px_rgba(93,214,44,0.25)]">
+                <Terminal className="size-4" />
               </div>
               <div>
-                <div className="flex items-center gap-1.5">
-                  <h2 className="font-serif text-sm font-semibold text-[#111110]">AI Assistant</h2>
-                  <Sparkles className="size-3 text-[#1F7A4C]" />
+                <div className="flex items-center gap-2">
+                  <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#F8F8F8]">CLI Console</h2>
+                  <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-[#202020] text-[#5DD62C] border border-[#2A2A2A]">
+                    v2.4
+                  </span>
                 </div>
-                <p className="font-mono text-[10px] text-[#6B6B66]">Interactive Ambassador</p>
+                <p className="font-mono text-[10px] text-[#9E9E9E]">Interactive Knowledge Base</p>
               </div>
             </div>
 
@@ -252,9 +248,9 @@ export function ChatWidget() {
               <button
                 type="button"
                 onClick={handleResetChat}
-                aria-label="Reset conversation"
-                title="Reset conversation"
-                className="rounded p-1.5 text-[#6B6B66] transition-colors hover:bg-white hover:text-[#111110] outline-hidden focus-visible:ring-1 focus-visible:ring-[#1F7A4C]"
+                aria-label="Reset console buffer"
+                title="Reset buffer"
+                className="rounded p-1.5 text-[#9E9E9E] transition-colors hover:bg-[#202020] hover:text-[#5DD62C] outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]"
               >
                 <RotateCcw className="size-3.5" />
               </button>
@@ -264,8 +260,8 @@ export function ChatWidget() {
                   setIsOpen(false);
                   triggerButtonRef.current?.focus();
                 }}
-                aria-label="Close chat window"
-                className="rounded p-1.5 text-[#6B6B66] transition-colors hover:bg-white hover:text-[#111110] outline-hidden focus-visible:ring-1 focus-visible:ring-[#1F7A4C]"
+                aria-label="Close console window"
+                className="rounded p-1.5 text-[#9E9E9E] transition-colors hover:bg-[#202020] hover:text-[#EF4444] outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]"
               >
                 <X className="size-4" />
               </button>
@@ -277,7 +273,7 @@ export function ChatWidget() {
             tabIndex={0}
             aria-label="Message history"
             aria-live="polite"
-            className="flex-1 space-y-3.5 overflow-y-auto p-4 scrollbar-thin outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]/30"
+            className="flex-1 space-y-3.5 overflow-y-auto p-4 scrollbar-thin outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]/30 bg-[#0F0F0F]"
           >
             {messages.map((msg) => (
               <div
@@ -286,20 +282,20 @@ export function ChatWidget() {
                   msg.sender === "user" ? "items-end" : "items-start"
                 }`}
               >
-                <div className="flex items-end gap-2 max-w-[88%]">
+                <div className="flex items-end gap-2 max-w-[90%]">
                   {msg.sender === "ai" && (
                     <div
                       aria-hidden="true"
                       className={`mb-1 flex size-6 shrink-0 items-center justify-center rounded-md border ${
                         msg.isError
-                          ? "border-red-300 bg-red-50 text-red-600"
-                          : "border-[#E3E1DA] bg-white text-[#1F7A4C]"
+                          ? "border-red-500/40 bg-red-950/30 text-red-400"
+                          : "border-[#337418] bg-[#141414] text-[#5DD62C]"
                       }`}
                     >
                       {msg.isError ? (
                         <AlertTriangle className="size-3.5" />
                       ) : (
-                        <Bot className="size-3.5" />
+                        <Terminal className="size-3.5" />
                       )}
                     </div>
                   )}
@@ -308,14 +304,14 @@ export function ChatWidget() {
                   <div
                     className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm leading-relaxed ${
                       msg.sender === "user"
-                        ? "rounded-tr-none bg-[#111110] text-[#F4F3EF]"
+                        ? "rounded-tr-none bg-[#202020] text-[#F8F8F8] border border-[#337418]/60"
                         : msg.isError
-                        ? "rounded-tl-none border border-red-200 bg-red-50 text-red-800"
-                        : "rounded-tl-none border border-[#E3E1DA] bg-[#F4F3EF] text-[#111110]"
+                        ? "rounded-tl-none border border-red-500/40 bg-red-950/20 text-red-300"
+                        : "rounded-tl-none border border-[#2A2A2A] bg-[#141414] text-[#E0E0E0]"
                     }`}
                   >
                     {msg.sender === "ai" ? (
-                      <div className="prose prose-xs max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-a:text-[#1F7A4C] prose-a:underline hover:prose-a:text-[#1F7A4C]/80 prose-strong:text-[#111110]">
+                      <div className="prose prose-xs max-w-none text-[#E0E0E0] prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-a:text-[#5DD62C] prose-a:underline hover:prose-a:text-[#5DD62C]/80 prose-strong:text-[#F8F8F8]">
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
@@ -324,7 +320,7 @@ export function ChatWidget() {
                                 {...props}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[#1F7A4C] underline hover:text-[#1F7A4C]/80"
+                                className="text-[#5DD62C] underline hover:text-[#5DD62C]/80"
                               />
                             ),
                           }}
@@ -340,14 +336,14 @@ export function ChatWidget() {
                   {msg.sender === "user" && (
                     <div
                       aria-hidden="true"
-                      className="mb-1 flex size-6 shrink-0 items-center justify-center rounded-md border border-[#E3E1DA] bg-[#F4F3EF] text-[#6B6B66]"
+                      className="mb-1 flex size-6 shrink-0 items-center justify-center rounded-md border border-[#2A2A2A] bg-[#141414] text-[#9E9E9E]"
                     >
                       <User className="size-3.5" />
                     </div>
                   )}
                 </div>
 
-                <span className="mt-1 text-[10px] text-[#6B6B66] px-8">
+                <span className="mt-1 text-[9px] font-mono text-[#9E9E9E]/70 px-8">
                   {msg.timestamp}
                 </span>
               </div>
@@ -355,14 +351,12 @@ export function ChatWidget() {
 
             {/* Typing Indicator */}
             {isLoading && (
-              <div className="flex items-center gap-2 text-xs text-[#6B6B66] px-2 py-1">
-                <div className="flex size-6 items-center justify-center rounded-md border border-[#E3E1DA] bg-white text-[#1F7A4C]">
-                  <Bot className="size-3.5" />
+              <div className="flex items-center gap-2 text-xs text-[#9E9E9E] px-2 py-1 font-mono">
+                <div className="flex size-6 items-center justify-center rounded-md border border-[#337418] bg-[#0F0F0F] text-[#5DD62C]">
+                  <Terminal className="size-3.5" />
                 </div>
-                <div className="flex items-center gap-1 rounded-xl border border-[#E3E1DA] bg-[#F4F3EF] px-3 py-1.5">
-                  <span className="size-1.5 rounded-full bg-[#1F7A4C] animate-bounce [animation-delay:-0.3s]" />
-                  <span className="size-1.5 rounded-full bg-[#1F7A4C] animate-bounce [animation-delay:-0.15s]" />
-                  <span className="size-1.5 rounded-full bg-[#1F7A4C] animate-bounce" />
+                <div className="flex items-center gap-1.5 rounded-lg border border-[#2A2A2A] bg-[#141414] px-3 py-1.5">
+                  <span className="text-[11px] text-[#5DD62C] animate-pulse">&gt; EXECUTING QUERY...</span>
                 </div>
               </div>
             )}
@@ -370,8 +364,8 @@ export function ChatWidget() {
             {/* Suggestion Pills (Shown when conversation is short) */}
             {messages.length <= 2 && !isLoading && (
               <div className="mt-3 pt-2">
-                <p className="mb-2 text-[11px] font-mono text-[#6B6B66] uppercase tracking-wider">
-                  Suggested questions:
+                <p className="mb-2 text-[10px] font-mono text-[#9E9E9E] uppercase tracking-wider">
+                  Preset CLI queries:
                 </p>
                 <div className="flex flex-col gap-1.5">
                   {SUGGESTION_PILLS.map((pill) => (
@@ -379,9 +373,9 @@ export function ChatWidget() {
                       key={pill}
                       type="button"
                       onClick={() => handlePillClick(pill)}
-                      className="inline-flex items-center justify-start gap-2 rounded-md border border-[#E3E1DA] bg-white px-3 py-1.5 text-left text-xs text-[#6B6B66] transition-all hover:border-[#1F7A4C] hover:text-[#111110] outline-hidden focus-visible:ring-1 focus-visible:ring-[#1F7A4C]"
+                      className="inline-flex items-center justify-start gap-2 rounded-md border border-[#2A2A2A] bg-[#141414] px-3 py-1.5 text-left text-xs font-mono text-[#9E9E9E] transition-all hover:border-[#5DD62C] hover:text-[#5DD62C] hover:bg-[#1A1A1A] outline-hidden focus-visible:ring-1 focus-visible:ring-[#5DD62C]"
                     >
-                      <Sparkles className="size-3 text-[#1F7A4C]" />
+                      <span className="text-[#5DD62C]">$</span>
                       <span>{pill}</span>
                     </button>
                   ))}
@@ -393,25 +387,28 @@ export function ChatWidget() {
           </div>
 
           {/* Input Form */}
-          <footer className="border-t border-[#E3E1DA] bg-[#F4F3EF] p-3">
+          <footer className="border-t border-[#2A2A2A] bg-[#141414] p-3">
             <form onSubmit={handleFormSubmit} className="flex items-center gap-2">
-              <input
-                ref={inputRef}
-                type="text"
-                maxLength={1000}
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask about my skills or work..."
-                aria-label="Message for AI Assistant"
-                disabled={isLoading}
-                className="flex-1 rounded-md border border-[#E3E1DA] bg-white px-3.5 py-2 text-xs sm:text-sm text-[#111110] placeholder-[#6B6B66]/60 transition-colors outline-hidden focus:border-[#1F7A4C] focus:ring-1 focus:ring-[#1F7A4C] disabled:opacity-50"
-              />
+              <div className="relative flex-1 flex items-center">
+                <span className="absolute left-3 text-xs font-mono text-[#5DD62C] select-none">&gt;</span>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  maxLength={1000}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Ask architecture, stack, or projects..."
+                  aria-label="Message for Interactive Console"
+                  disabled={isLoading}
+                  className="w-full rounded-md border border-[#2A2A2A] bg-[#0F0F0F] pl-7 pr-3 py-2 text-xs font-mono text-[#F8F8F8] placeholder-[#9E9E9E]/50 transition-colors outline-hidden focus:border-[#5DD62C] focus:ring-1 focus:ring-[#5DD62C] disabled:opacity-50"
+                />
+              </div>
 
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isLoading}
                 aria-label="Send message"
-                className="inline-flex size-9 items-center justify-center rounded-md bg-[#111110] text-[#F4F3EF] transition-all hover:bg-[#1F7A4C] disabled:cursor-not-allowed disabled:opacity-40 outline-hidden focus-visible:ring-2 focus-visible:ring-[#1F7A4C]"
+                className="inline-flex size-9 items-center justify-center rounded-md bg-[#5DD62C] text-[#0F0F0F] transition-all hover:bg-[#5DD62C]/90 hover:shadow-[0_0_12px_rgba(93,214,44,0.3)] disabled:cursor-not-allowed disabled:opacity-30 outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
               >
                 <Send className="size-4" />
               </button>
@@ -420,7 +417,7 @@ export function ChatWidget() {
         </div>
       )}
 
-      {/* Floating Trigger Button */}
+      {/* Floating Trigger Button (Clean Terminal Console Trigger) */}
       <div className="flex justify-end">
         <button
           ref={triggerButtonRef}
@@ -428,21 +425,13 @@ export function ChatWidget() {
           onClick={() => setIsOpen((prev) => !prev)}
           aria-expanded={isOpen}
           aria-haspopup="dialog"
-          aria-label={isOpen ? "Close AI Chat Assistant" : "Open AI Chat Assistant"}
-          className="group relative flex size-12 items-center justify-center rounded-full bg-[#111110] text-[#F4F3EF] border border-[#E3E1DA] shadow-md transition-all duration-200 hover:bg-[#1F7A4C] hover:scale-105 active:scale-95 outline-hidden focus-visible:ring-2 focus-visible:ring-[#1F7A4C]"
+          aria-label={isOpen ? "Close Interactive Console" : "Open Interactive Console"}
+          className="group relative flex size-12 items-center justify-center rounded-full bg-[#111110] text-[#F8F8F8] border border-[#2A2A2A] shadow-md transition-all duration-200 hover:border-[#5DD62C] hover:text-[#5DD62C] hover:scale-105 active:scale-95 outline-hidden focus-visible:ring-2 focus-visible:ring-[#5DD62C]"
         >
           {isOpen ? (
             <X className="size-5 transition-transform duration-200 group-hover:rotate-90" />
           ) : (
-            <>
-              <MessageSquare className="size-5" />
-              <span
-                aria-hidden="true"
-                className="absolute -top-1 -right-1 flex size-3.5 items-center justify-center rounded-full bg-[#1F7A4C] text-[8px] font-mono text-white"
-              >
-                AI
-              </span>
-            </>
+            <Terminal className="size-5" />
           )}
         </button>
       </div>

@@ -84,6 +84,16 @@ function BentoCard({
           transformStyle: "preserve-3d",
         }}
       >
+        {/* Tech HUD Corner Reticles (Top-Left & Bottom-Right) */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-2.5 left-2.5 size-2.5 border-t border-l border-[#5DD62C] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-2.5 right-2.5 size-2.5 border-b border-r border-[#5DD62C] opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
+        />
+
         {/* Inner Content (Counter-shifts slightly for parallax depth) */}
         <div
           className="flex flex-col h-full justify-between space-y-6 transition-transform duration-200"
@@ -99,20 +109,20 @@ function BentoCard({
               {item.techStack.slice(0, 3).map((tag, i) => (
                 <span
                   key={i}
-                  className="rounded-full bg-[#0F0F0F] px-2.5 py-0.5 font-mono text-[11px] text-[#9E9E9E] border border-[#2A2A2A]"
+                  className="rounded-full bg-[#0F0F0F] px-2.5 py-0.5 font-mono text-[11px] text-[#9E9E9E] border border-[#2A2A2A] transition-colors group-hover:border-[#5DD62C]/40 group-hover:text-[#F8F8F8]"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            {/* Sliding Diagonal Arrow */}
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-[#5DD62C] group-hover:text-[#5DD62C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+            {/* Sliding Diagonal Arrow with Technical Glow */}
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-[#2A2A2A] bg-[#0F0F0F] text-[#F8F8F8] transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-[#5DD62C] group-hover:text-[#5DD62C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_10px_rgba(93,214,44,0.3)]">
               <ArrowUpRight className="size-4" />
             </span>
           </div>
 
-          {/* Optional Image for Large/Medium cards if available */}
+          {/* Image for Large/Medium cards with Tech Scanline & Corner Reticles */}
           {item.image && (item.size === "large" || item.size === "medium") && (
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-[#2A2A2A] bg-[#0F0F0F]">
               <Image
@@ -122,13 +132,18 @@ function BentoCard({
                 sizes="(max-width: 768px) 100vw, 600px"
                 className="object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-102"
               />
+              {/* Subtle Tech Laser Scanline on Card Hover */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 h-12 bg-gradient-to-b from-transparent via-[#5DD62C]/15 to-transparent opacity-0 group-hover:opacity-100 tech-scan-beam"
+              />
             </div>
           )}
 
           {/* Card Bottom: Title & Description */}
           <div className="space-y-2 pt-2">
             <h3 className="font-serif text-xl sm:text-2xl font-medium tracking-tight text-[#F8F8F8] transition-colors duration-200 group-hover:text-[#5DD62C]">
-              <Link href={item.link} className="outline-hidden focus-visible:underline">
+              <Link href={item.link} className="outline-hidden focus-visible:underline after:absolute after:inset-0">
                 {item.title}
               </Link>
             </h3>
@@ -153,7 +168,7 @@ export function BentoProjects({ projects = [] }: BentoProjectsProps) {
       title: published[0]?.title || "Dynamic Portfolio & Systems Engine",
       description:
         published[0]?.description ||
-        "Production-grade distributed web application with Next.js 16, TypeScript, MongoDB architecture, and autonomous AI chat capabilities.",
+        "Production-grade distributed web application with Next.js 16, TypeScript, MongoDB architecture, and high-performance real-time capabilities.",
       techStack: published[0]?.techStack || ["Next.js 16", "TypeScript", "MongoDB", "Express"],
       link: published[0]?.slug ? `/projects/${published[0].slug}` : "/projects",
       image: published[0]?.image,
@@ -172,11 +187,11 @@ export function BentoProjects({ projects = [] }: BentoProjectsProps) {
     },
     {
       id: published[2]?._id || "3",
-      title: published[2]?.title || "Interactive Gemini AI Knowledge Bot",
+      title: published[2]?.title || "High-Throughput WebSocket Telemetry Engine",
       description:
         published[2]?.description ||
-        "Intelligent real-time conversational agent grounded in personal engineering background with streaming markdown response generation.",
-      techStack: published[2]?.techStack || ["Gemini API", "React 19", "WebSockets"],
+        "Real-time bidirectional event streaming architecture with heartbeat reconnection, backpressure handling, and message ordering.",
+      techStack: published[2]?.techStack || ["Node.js", "TypeScript", "WebSockets"],
       link: published[2]?.slug ? `/projects/${published[2].slug}` : "/projects",
       image: published[2]?.image,
       size: "medium",

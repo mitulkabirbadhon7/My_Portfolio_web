@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { CustomCursor } from "@/components/motion/custom-cursor";
+import { PageTransition } from "@/components/motion/page-transition";
 
 export function PublicShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -22,7 +23,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
       <CustomCursor />
       <Navbar />
       <main id="main-content" className="flex-1 w-full max-w-full overflow-x-clip">
-        {children}
+        <PageTransition>{children}</PageTransition>
       </main>
       <Footer />
     </div>

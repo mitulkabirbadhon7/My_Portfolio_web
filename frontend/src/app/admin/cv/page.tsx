@@ -33,7 +33,7 @@ import {
   Building,
   School,
   PenTool,
-  Sparkles,
+  Terminal,
   X,
 } from "lucide-react";
 
@@ -854,7 +854,7 @@ export default function AdminSettingsAndCVPage() {
         <form onSubmit={handleSaveSettings} noValidate>
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Sparkles className="size-5 text-[#5DD62C]" />
+              <Terminal className="size-5 text-[#5DD62C]" />
               <CardTitle className="text-lg font-bold text-[#F8F8F8]">
                 Philosophy &amp; Editorial Voice
               </CardTitle>
