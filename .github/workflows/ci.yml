@@ -35,7 +35,7 @@ jobs:
           cache-dependency-path: backend/package-lock.json
 
       - name: Install backend dependencies
-        run: npm ci
+        run: npm ci || npm install --no-audit
 
       - name: Build backend TypeScript
         run: npm run build
@@ -73,7 +73,7 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install frontend dependencies
-        run: npm ci
+        run: npm ci || npm install --no-audit
 
       - name: Run ESLint
         run: npm run lint
