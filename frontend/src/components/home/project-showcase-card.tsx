@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
-import { Terminal, ArrowUpRight, Code2, Layers } from "lucide-react";
+import { Terminal, ArrowUpRight, Code2 } from "lucide-react";
 import { Project } from "@/types";
 
 interface ProjectShowcaseCardProps {

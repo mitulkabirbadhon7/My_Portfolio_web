@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, FolderGit2, ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Project } from "@/types";
 
 interface BentoProjectsProps {
@@ -147,7 +147,7 @@ function BentoCard({
                 {item.title}
               </Link>
             </h3>
-            <p className="text-sm text-[#9E9E9E] leading-relaxed line-clamp-3">
+            <p className="text-sm text-[#9E9E9E] leading-relaxed line-clamp-2">
               {item.description}
             </p>
           </div>

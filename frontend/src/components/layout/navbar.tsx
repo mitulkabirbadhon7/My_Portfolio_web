@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, FileDown, ArrowUpRight } from "lucide-react";
+import { Menu, X, FileDown } from "lucide-react";
 import { useSettings } from "@/context/settings-context";
 
 interface NavRoute {

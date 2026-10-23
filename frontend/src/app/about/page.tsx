@@ -7,7 +7,6 @@ import {
   Building2,
   Terminal,
   ArrowRight,
-  User,
   GraduationCap,
   School,
   FileDown,
@@ -170,18 +169,10 @@ export default async function AboutPage() {
               Engineering systems with precision, performance, and durability.
             </h1>
 
-            <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#9E9E9E] font-sans">
+            <div className="space-y-3 text-base sm:text-lg leading-relaxed text-[#9E9E9E] font-sans">
               <p>
-                I am <span className="font-sans font-bold text-[#F8F8F8]">Mitul Kabir</span>{" "}
-                <span className="font-sans font-bold text-[#5DD62C]">Badhon</span>, a Full-Stack Software
-                Engineer dedicated to constructing maintainable, resilient, and secure web applications.
-                My work emphasizes distributed architectures, production-grade TypeScript backends, and
-                tactile, uncluttered user interfaces.
-              </p>
-              <p>
-                With a rigorous foundation spanning server-side runtime performance, relational and
-                document database design, and modern client frameworks, I treat code clarity and
-                architectural boundaries as primary requirements.
+                <span className="font-sans font-bold text-[#F8F8F8]">Mitul Kabir </span>
+                <span className="font-sans font-bold text-[#5DD62C]">Badhon</span> &mdash; Full-Stack Software Engineer building resilient backend architectures, distributed services, and high-performance TypeScript systems.
               </p>
             </div>
 

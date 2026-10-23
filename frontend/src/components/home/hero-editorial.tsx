@@ -63,8 +63,7 @@ export function HeroEditorial({ settings }: HeroEditorialProps) {
             </h1>
 
             <p className="text-base sm:text-lg text-[#9E9E9E] max-w-[56ch] leading-relaxed font-sans pt-2">
-              Building resilient backend architectures, production TypeScript systems, and calm,
-              responsive digital interfaces with rigorous craft.
+              Production backend systems • Distributed architectures • High-performance TypeScript.
             </p>
           </div>
 

@@ -31,8 +31,6 @@ export function ContactEditorial({ settings }: ContactEditorialProps) {
   };
 
   const email = settings?.contactEmail || "mitulkabirbadhon7@gmail.com";
-  const github = settings?.githubUrl || "https://github.com/mitulkabirbadhon7";
-  const linkedin = settings?.linkedinUrl || "https://linkedin.com/in/mitulkabirbadhon";
 
   return (
     <section

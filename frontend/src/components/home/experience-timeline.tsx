@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowUpRight, GraduationCap, Building2 } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Experience, Settings } from "@/types";
 
 interface ExperienceTimelineProps {

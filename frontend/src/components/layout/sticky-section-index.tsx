@@ -2,15 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 
-const SECTIONS = [
-  { id: "hero", label: "01", name: "Overview" },
-  { id: "about", label: "02", name: "About" },
-  { id: "skills", label: "03", name: "Skills" },
-  { id: "projects", label: "04", name: "Projects" },
-  { id: "experience", label: "05", name: "Timeline" },
-  { id: "contact", label: "06", name: "Contact" },
-];
-
 export function StickySectionIndex() {
   const [activeSection, setActiveSection] = useState("01");
 

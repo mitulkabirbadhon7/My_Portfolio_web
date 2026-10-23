@@ -57,17 +57,7 @@ export function ContactForm() {
       ? rawEmail
       : "mitulkabirbadhon7@gmail.com";
 
-  const rawGithub = settings.githubUrl?.trim();
-  const githubUrl =
-    rawGithub && rawGithub !== "https://github.com" && rawGithub !== "https://github.com/your-actual-username"
-      ? rawGithub
-      : "https://github.com/mitulkabirbadhon7";
 
-  const rawLinkedin = settings.linkedinUrl?.trim();
-  const linkedinUrl =
-    rawLinkedin && rawLinkedin !== "https://linkedin.com" && rawLinkedin !== "https://linkedin.com/in/your-actual-profile"
-      ? rawLinkedin
-      : "https://linkedin.com/in/mitulkabirbadhon";
 
   const validate = (): boolean => {
     const errs: FormErrors = {};
